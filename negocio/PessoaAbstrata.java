@@ -8,6 +8,7 @@ import java.time.LocalDate;
 /**
  *
  * @author ezequiel
+ * @param <T>
  */
 public abstract class PessoaAbstrata<T> implements IVerificarPessoa<T> {
     protected String nome;

@@ -4,6 +4,8 @@
  */
 package negocio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ezequiel
@@ -21,6 +23,27 @@ public abstract class AgbaAbstrato<P, ID> implements IAgba<P, ID>{
         this.consultas = consultas;
         
     }
+    
+    @Override
+    public abstract void iniciarSistema();
+    
+    @Override
+    public abstract P cadastrar(P pessoa);
+    
+    @Override
+    public abstract P atualizar(ID id, P pessoaAtualizada);
+    
+    @Override
+    public abstract P buscar(ID id);
+    
+    @Override
+    public abstract P deletar(P pessoa);
+    
+    @Override
+    public abstract void listar(ArrayList<P> pessoas);
+    
+    @Override
+    public abstract void finalizarSistema();
     
     
     public void setPacientes(P pacientes) {
