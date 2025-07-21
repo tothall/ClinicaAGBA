@@ -1,6 +1,8 @@
-package booktour;
+package teste;
 import java.util.ArrayList;
-public class Teste {
+import dados.*;
+import negocio.*;
+public class TesteRepositorioMedico {
     public static void main(String[] args) {
         Medico med1 = new Medico("123");
         Medico med2 = new Medico("124");

@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package booktour;
+package dados;
 import java.util.ArrayList;
+import negocio.*;
+
 
 public class RepositorioConsulta implements IRepositorio<Consulta>{
     private ArrayList<Consulta> consultas;
@@ -27,7 +29,7 @@ public class RepositorioConsulta implements IRepositorio<Consulta>{
 
     @Override
     public void atualizar(Consulta consulta_antiga, Consulta consulta_atualizada){
-        int index = consultas.indexOf(c);
+        int index = consultas.indexOf(consulta_antiga);
         consultas.set(index, consulta_atualizada);
     }
     
@@ -46,7 +48,7 @@ public class RepositorioConsulta implements IRepositorio<Consulta>{
         return consultas;
     }
 
-    public void setMedicos(ArrayList<Conulta> consultas) {
+    public void setMedicos(ArrayList<Consulta> consultas) {
         this.consultas = consultas;
     }
 }

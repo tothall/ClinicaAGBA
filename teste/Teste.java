@@ -8,10 +8,8 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Scanner;
-import negocio.Consulta;
-import negocio.Medico;
-import negocio.Paciente;
-import negocio.Usuario;
+import negocio.*;
+
 
 /**
  *
@@ -99,7 +97,7 @@ public class Teste {
         
         nova = new Consulta("002", LocalDate.of(2025, Month.AUGUST, 17), "034.714.911-55", "1234-56", 2, LocalTime.of(14, 30));
         consultas.add(nova);
-        
+        input.close();
         
         
         
