@@ -12,27 +12,23 @@ import javax.swing.JOptionPane;
 public abstract class UsuarioAbstrato implements IAutenticacao {
     protected String username;
     protected String senha;
-    protected Boolean isAdmin;
     
-    public UsuarioAbstrato(String username, String senha, Boolean isAdmin) {
+    public UsuarioAbstrato(String username, String senha) {
         this.username = username;
         this.senha = senha;
-        this.isAdmin = isAdmin;
     }
     
     @Override
-    public void Login(String username, String senha, boolean isAdmin) throws LoginIncorretoException {
-        if(!(this.isAdmin == true && "admin".equals(this.username) && "123".equals(this.senha))){
+    public void Login(String username, String senha) throws LoginIncorretoException {
+        if(!("admin".equals(this.username) && "123".equals(this.senha))){
             throw new LoginIncorretoException("Login ou senha incorretos!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Bem-vindo", JOptionPane.INFORMATION_MESSAGE);
         }
         
     }
     
     @Override
     public void EsqueciSenha(String username, String senha) {
-        
+        JOptionPane.showMessageDialog(null, "USUÁRIO: admin\nSENHA: 123", "ATENÇÃO!", JOptionPane.ERROR_MESSAGE);
     }
     
     @Override
@@ -66,20 +62,6 @@ public abstract class UsuarioAbstrato implements IAutenticacao {
      */
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    /**
-     * @return the isAdmin
-     */
-    public Boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    /**
-     * @param isAdmin the isAdmin to set
-     */
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
     }
     
     
