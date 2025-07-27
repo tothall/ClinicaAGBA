@@ -9,12 +9,12 @@ import gui.*;
  *
  * @author lucas
  */
-public class JFrameBuscarMedicos extends javax.swing.JFrame {
+public class JFrameBuscarPacientes extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameLogin
      */
-    public JFrameBuscarMedicos() {
+    public JFrameBuscarPacientes() {
         initComponents();
     }
 
@@ -75,7 +75,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Buscar Médicos");
+        jLabel3.setText("Buscar Pacientes");
 
         jButton1.setText("Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "CRM", "Nome", "Especialidade"
+                "Nome", "CPF", "Contato"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -234,14 +234,30 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameBuscarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameBuscarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameBuscarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscarMedicos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameBuscarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -262,7 +278,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameBuscarMedicos().setVisible(true);
+                new JFrameBuscarPacientes().setVisible(true);
             }
         });
     }
