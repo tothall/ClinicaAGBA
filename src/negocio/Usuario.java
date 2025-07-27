@@ -11,9 +11,10 @@ package negocio;
 public class Usuario extends UsuarioAbstrato {
     protected String email;
     
-    public Usuario(String username, String senha, boolean isAdmin, String email) {
-        super(username, senha, isAdmin);
-        this.email = email;      
+    public Usuario(String username, String senha) {
+        super(username, senha);
+        this.email = null;
+        
     }
     
     
