@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package negocio;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,12 @@ public abstract class UsuarioAbstrato implements IAutenticacao {
     }
     
     @Override
-    public void Login(String username, String senha, boolean isAdmin) {
+    public void Login(String username, String senha, boolean isAdmin) throws LoginIncorretoException {
+        if(!(this.isAdmin == true && "admin".equals(this.username) && "123".equals(this.senha))){
+            throw new LoginIncorretoException("Login ou senha incorretos!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Bem-vindo", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }
     

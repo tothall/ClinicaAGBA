@@ -15,10 +15,10 @@ public class Paciente extends Pessoa {
     protected String cpf;
     protected ArrayList<Consulta> consultas;
     
-    public Paciente(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email, String cpf, ArrayList<Consulta> consultas) {
+    public Paciente(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email, String cpf) {
         super(nome, sobrenome, idade, data_nascimento, genero, telefone, email);
         this.cpf = cpf;
-        this.consultas = consultas;
+        this.consultas = new ArrayList<>();
     }
     
     @Override

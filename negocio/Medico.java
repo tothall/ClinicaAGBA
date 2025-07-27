@@ -16,11 +16,11 @@ public class Medico extends Pessoa {
     protected String especialidade;
     protected ArrayList<Consulta> consultas;
     
-    public Medico(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email, String crm, String especialidade,ArrayList<Consulta> consultas) {
+    public Medico(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email, String crm, String especialidade) {
         super(nome, sobrenome, idade, data_nascimento, genero, telefone, email);
         this.crm = crm;
         this.especialidade = especialidade;
-        this.consultas = consultas;
+        this.consultas = new ArrayList<>();
     }
     
     @Override

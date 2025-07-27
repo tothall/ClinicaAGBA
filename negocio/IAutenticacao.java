@@ -10,7 +10,7 @@ package negocio;
  */
 public interface IAutenticacao {
     
-    void Login(String username, String senha, boolean isAdm);
+    void Login(String username, String senha, boolean isAdm) throws LoginIncorretoException;
     void EsqueciSenha(String username, String senha);
     void Logout(String username, String senha);
 }
