@@ -6,6 +6,7 @@ package dados;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.io.File;
 
 /**
  *
@@ -16,7 +17,29 @@ public class Conexao {
     private static final String URL = "jdbc:sqlite:agba.db";
 
     public static Connection conectar() throws SQLException {
+        try {
+            // Força o carregamento do driver JDBC do SQLite
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Driver SQLite não encontrado!", e);
+        }
+
+        // Mostra o caminho absoluto do arquivo .db (ajuda a debugar)
+        File dbFile = new File("agba.db");
+        System.out.println("Caminho do banco: " + dbFile.getAbsolutePath());
+
+        // Abre a conexão com o banco
         return DriverManager.getConnection(URL);
     }
+
+    public static void verificarEstrutura(Connection conn) throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS usuario ("
+                   + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                   + "login TEXT NOT NULL,"
+                   + "senha TEXT NOT NULL"
+                   + ");";
+        conn.createStatement().execute(sql);
+    }
 }
+
 
