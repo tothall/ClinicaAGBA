@@ -13,13 +13,13 @@ import java.time.LocalTime;
  */
 public class Consulta {
     protected String id_consulta;
-    protected LocalDate data_consulta;
+    protected String data_consulta;
     protected String id_paciente;
     protected String id_medico;
-    protected int consultorio;
-    protected LocalTime hora_consulta;
+    protected String consultorio;
+    protected String hora_consulta;
     
-    public Consulta(String id_consulta, LocalDate data_consulta, String id_paciente, String id_medico, int consultorio, LocalTime hora_consulta) {
+    public Consulta(String id_consulta, String data_consulta, String id_paciente, String id_medico, String consultorio, String hora_consulta) {
         this.id_consulta = id_consulta;
         this.data_consulta = data_consulta;
         this.id_paciente = id_paciente;
@@ -38,8 +38,8 @@ public class Consulta {
                 "\nConsultório: " + this.getConsultorio();
     }
     
-    public boolean verificarDuplicata(LocalDate data_consulta, LocalTime hora_consulta, int consultorio) {
-        return LocalDate.now() == this.data_consulta && LocalTime.now() == hora_consulta && 1 == consultorio;
+    public boolean verificarDuplicata(String data_consulta, String hora_consulta, String consultorio) {
+        return false;
     }
     
 
@@ -60,14 +60,14 @@ public class Consulta {
     /**
      * @return the data_consulta
      */
-    public LocalDate getData_consulta() {
+    public String getData_consulta() {
         return data_consulta;
     }
 
     /**
      * @param data_consulta the data_consulta to set
      */
-    public void setData_consulta(LocalDate data_consulta) {
+    public void setData_consulta(String data_consulta) {
         this.data_consulta = data_consulta;
     }
 
@@ -102,28 +102,28 @@ public class Consulta {
     /**
      * @return the consultorio
      */
-    public int getConsultorio() {
+    public String getConsultorio() {
         return consultorio;
     }
 
     /**
      * @param consultorio the consultorio to set
      */
-    public void setConsultorio(int consultorio) {
+    public void setConsultorio(String consultorio) {
         this.consultorio = consultorio;
     }
 
     /**
      * @return the hora_consulta
      */
-    public LocalTime getHora_consulta() {
+    public String getHora_consulta() {
         return hora_consulta;
     }
 
     /**
      * @param hora_consulta the hora_consulta to set
      */
-    public void setHora_consulta(LocalTime hora_consulta) {
+    public void setHora_consulta(String hora_consulta) {
         this.hora_consulta = hora_consulta;
     }
     

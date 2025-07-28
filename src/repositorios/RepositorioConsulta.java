@@ -65,13 +65,13 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         VALUES (?, ?, ?, ?, ?, ?)
     """;
 
-    try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
         pstmt.setString(1, c.getId_consulta());
-        pstmt.setString(2, c.getData_consulta().toString());
-        pstmt.setString(3, c.getHora_consulta().toString());
+        pstmt.setString(2, c.getData_consulta());
+        pstmt.setString(3, c.getHora_consulta());
         pstmt.setString(4, c.getId_paciente());
         pstmt.setString(5, c.getId_medico());
-        pstmt.setInt(6, c.getConsultorio());
+        pstmt.setString(6, c.getConsultorio());
         pstmt.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();
@@ -87,11 +87,11 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         """;
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, c.getData_consulta().toString());
+            pstmt.setString(1, c.getData_consulta());
             pstmt.setString(2, c.getId_paciente());
             pstmt.setString(3, c.getId_medico());
-            pstmt.setInt(4, c.getConsultorio());
-            pstmt.setString(5, c.getHora_consulta().toString());
+            pstmt.setString(4, c.getConsultorio());
+            pstmt.setString(5, c.getHora_consulta());
             pstmt.setString(6, c.getId_consulta());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -121,11 +121,11 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
             if (rs.next()) {
                 return new Consulta(
                     rs.getString("id_consulta"),
-                    LocalDate.parse(rs.getString("data_consulta")),
+                    rs.getString("data_consulta"),
                     rs.getString("id_paciente"),
                     rs.getString("id_medico"),
-                    rs.getInt("consultorio"),
-                    LocalTime.parse(rs.getString("hora_consulta"))
+                    rs.getString("consultorio"),
+                    rs.getString("hora_consulta")
                 );
             }
         } catch (SQLException e) {
@@ -143,11 +143,11 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
             while (rs.next()) {
                 Consulta c = new Consulta(
                     rs.getString("id_consulta"),
-                    LocalDate.parse(rs.getString("data_consulta")),
+                    rs.getString("data_consulta"),
                     rs.getString("id_paciente"),
                     rs.getString("id_medico"),
-                    rs.getInt("consultorio"),
-                    LocalTime.parse(rs.getString("hora_consulta"))
+                    rs.getString("consultorio"),
+                    rs.getString("hora_consulta")
                 );
                 consultas.add(c);
             }
@@ -179,11 +179,11 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         while (rs.next()) {
             Consulta c = new Consulta(
                 rs.getString("id_consulta"),
-                LocalDate.parse(rs.getString("data_consulta")),
+                rs.getString("data_consulta"),
                 rs.getString("id_paciente"),
                 rs.getString("id_medico"),
-                rs.getInt("consultorio"),
-                LocalTime.parse(rs.getString("hora_consulta"))
+                rs.getString("consultorio"),
+                rs.getString("hora_consulta")
             );
             consultas.add(c);
         }
@@ -204,11 +204,11 @@ public List<Consulta> listarPorPaciente(String cpfPaciente) {
         while (rs.next()) {
             Consulta c = new Consulta(
                 rs.getString("id_consulta"),
-                LocalDate.parse(rs.getString("data_consulta")),
+                rs.getString("data_consulta"),
                 rs.getString("id_paciente"),
                 rs.getString("id_medico"),
-                rs.getInt("consultorio"),
-                LocalTime.parse(rs.getString("hora_consulta"))
+                rs.getString("consultorio"),
+                rs.getString("hora_consulta")
             );
             consultas.add(c);
         }
@@ -230,7 +230,7 @@ public void verificarConflitoSala(Consulta c) throws SalaOcupadaException {
 
         stmt.setString(1, c.getData_consulta().toString());
         stmt.setString(2, c.getHora_consulta().toString());
-        stmt.setInt(3, c.getConsultorio());
+        stmt.setString(3, c.getConsultorio());
 
         ResultSet rs = stmt.executeQuery();
 
@@ -243,7 +243,7 @@ public void verificarConflitoSala(Consulta c) throws SalaOcupadaException {
     }
 }
 
-public boolean verificarPessoaOcupada(String idMedico, String idPaciente, LocalDate data, LocalTime hora) throws PessoaOcupadoException {
+public boolean verificarPessoaOcupada(String idMedico, String idPaciente, String data, String hora) throws PessoaOcupadoException {
     String sql = """
         SELECT COUNT(*) 
         FROM consulta 
@@ -255,8 +255,8 @@ public boolean verificarPessoaOcupada(String idMedico, String idPaciente, LocalD
     try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
         pstmt.setString(1, idMedico);
         pstmt.setString(2, idPaciente);
-        pstmt.setString(3, data.toString());
-        pstmt.setString(4, hora.toString());
+        pstmt.setString(3, data);
+        pstmt.setString(4, hora);
 
         ResultSet rs = pstmt.executeQuery();
         if (rs.next() && rs.getInt(1) > 0) {

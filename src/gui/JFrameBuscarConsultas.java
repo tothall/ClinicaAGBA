@@ -1,4 +1,7 @@
 package gui;
+import javax.swing.JOptionPane;
+import negocio.Consulta;
+import repositorios.RepositorioConsulta;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -231,7 +234,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameMenu().setVisible(true);
+                new JFrameBuscarConsultas().setVisible(true);
                 dispose();
             }
         });
@@ -241,14 +244,25 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameCadastrarPacientes().setVisible(true);
+                new JFrameCadastrarConsulta().setVisible(true);
                 dispose();
             }
         });
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: AQUIIIII
+        String input = JOptionPane.showInputDialog(this, "Digite o ID da consulta:");
+        RepositorioConsulta repositorio = new RepositorioConsulta();
+        Consulta c = repositorio.buscar(input);
+        
+        if(c == null){
+            JOptionPane.showMessageDialog(null, "Usuário não encontrado", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

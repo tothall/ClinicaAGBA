@@ -15,11 +15,13 @@ import java.io.File;
 
 public class Conexao {
     private static final String URL = "jdbc:sqlite:agba.db";
+    private static Connection conn = null;
 
     public static Connection conectar() throws SQLException {
         try {
             // Força o carregamento do driver JDBC do SQLite
             Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection(URL);
         } catch (ClassNotFoundException e) {
             throw new SQLException("Driver SQLite não encontrado!", e);
         }
@@ -28,8 +30,7 @@ public class Conexao {
         File dbFile = new File("agba.db");
         System.out.println("Caminho do banco: " + dbFile.getAbsolutePath());
 
-        // Abre a conexão com o banco
-        return DriverManager.getConnection(URL);
+        return conn;
     }
 
     public static void verificarEstrutura(Connection conn) throws SQLException {
@@ -39,6 +40,23 @@ public class Conexao {
                    + "senha TEXT NOT NULL"
                    + ");";
         conn.createStatement().execute(sql);
+    }
+    
+    public static void encerrarAplicacao(Connection conn) {
+    try {
+        if (conn != null && !conn.isClosed()) {
+            conn.close(); 
+            System.out.println("Conexão com o banco encerrada com sucesso.");
+        }
+    } catch (SQLException e) {
+        System.err.println("Erro ao fechar o banco: " + e.getMessage());
+    } finally {
+        System.exit(0); 
+    }
+    }
+    
+    public static Connection getConexaoAtual() {
+        return conn;
     }
 }
 
