@@ -260,7 +260,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
         RepositorioConsulta repositorio = new RepositorioConsulta();
         Consulta c = repositorio.buscar(input);
         if(c == null){
-            JOptionPane.showMessageDialog(null, "Usuário não encontrado", "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Consulta não encontrada", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         JFrameAtualizarConsulta telaAtualizar = new JFrameAtualizarConsulta(c);
         telaAtualizar.setVisible(true);

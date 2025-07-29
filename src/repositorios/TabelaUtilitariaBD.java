@@ -61,5 +61,62 @@ public class TabelaUtilitariaBD {
         return null;
     }
 }
+    
+    public static DefaultTableModel filtrarID(String nomeTabela, String id) {
+        String busca = "";
+    
+    switch (nomeTabela) {
+        case "medico":
+            busca = "SELECT * FROM " + nomeTabela + " WHERE crm = ?";
+            break;
+        case "paciente":
+            busca = "SELECT * FROM " + nomeTabela + " WHERE cpf = ?";
+            break;
+        case "consulta":
+            busca = "SELECT * FROM " + nomeTabela + " WHERE id_consulta = ?";
+            break;
+            
+    }
+    
+
+    try (Connection conexao = Conexao.conectar();
+         PreparedStatement pstmt = conexao.prepareStatement(busca)) {
+
+        pstmt.setString(1, id);
+        ResultSet rs = pstmt.executeQuery();
+
+        ResultSetMetaData metaData = rs.getMetaData();
+        int colunas = metaData.getColumnCount();
+
+        Vector<String> nomesColunas = new Vector<>();
+        for (int i = 1; i <= colunas; i++) {
+            nomesColunas.add(metaData.getColumnName(i));
+        }
+
+        Vector<Vector<Object>> dados = new Vector<>();
+        while (rs.next()) {
+            Vector<Object> linha = new Vector<>();
+            for (int i = 1; i <= colunas; i++) {
+                linha.add(rs.getObject(i));
+            }
+            dados.add(linha);
+        }
+
+        DefaultTableModel modelo = new DefaultTableModel(dados, nomesColunas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        return modelo;
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro na busca: " + e.getMessage());
+        e.printStackTrace();
+        return null;
+    }
+}
+
 
 }
