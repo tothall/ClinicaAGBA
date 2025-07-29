@@ -54,5 +54,21 @@ public class Paciente extends Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     
 }
