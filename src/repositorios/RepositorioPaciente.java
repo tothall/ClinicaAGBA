@@ -7,7 +7,6 @@ import dados.Conexao;
 import negocio.Paciente;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.IdDuplicadoException;
@@ -26,12 +25,12 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
             CREATE TABLE IF NOT EXISTS paciente (
                 nome TEXT NOT NULL,
                 sobrenome TEXT NOT NULL,
-                idade INTEGER,
                 data_nascimento TEXT,
                 genero TEXT,
-                telefone TEXT,
+                cpf TEXT PRIMARY KEY,
                 email TEXT,
-                cpf TEXT PRIMARY KEY
+                telefone TEXT
+                
             );
         """;
 
@@ -48,19 +47,18 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
         throw new IdDuplicadoException("CPF já cadastrado: " + p.getCpf());
     }
         String sql = """
-            INSERT INTO paciente (nome, sobrenome, idade, data_nascimento, genero, telefone, email, cpf)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO paciente (nome, sobrenome, data_nascimento, genero, cpf, email, telefone)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
         """;
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, p.getNome());
             pstmt.setString(2, p.getSobrenome());
-            pstmt.setInt(3, p.getIdade());
-            pstmt.setString(4, p.getData_nascimento().toString());
-            pstmt.setString(5, p.getGenero());
-            pstmt.setString(6, p.getTelefone());
-            pstmt.setString(7, p.getEmail());
-            pstmt.setString(8, p.getCpf());
+            pstmt.setString(3, p.getData_nascimento());
+            pstmt.setString(4, p.getGenero());
+            pstmt.setString(5, p.getCpf());
+            pstmt.setString(6, p.getEmail());
+            pstmt.setString(7, p.getTelefone());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,20 +69,19 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     public void atualizar(Paciente p) {
         String sql = """
             UPDATE paciente SET
-                nome = ?, sobrenome = ?, idade = ?, data_nascimento = ?, genero = ?,
-                telefone = ?, email = ?
+                nome = ?, sobrenome = ?, data_nascimento = ?, genero = ?,
+                email = ?, telefone = ?
             WHERE cpf = ?;
         """;
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, p.getNome());
             pstmt.setString(2, p.getSobrenome());
-            pstmt.setInt(3, p.getIdade());
-            pstmt.setString(4, p.getData_nascimento().toString());
-            pstmt.setString(5, p.getGenero());
-            pstmt.setString(6, p.getTelefone());
-            pstmt.setString(7, p.getEmail());
-            pstmt.setString(8, p.getCpf());
+            pstmt.setString(3, p.getData_nascimento());
+            pstmt.setString(4, p.getGenero());
+            pstmt.setString(5, p.getCpf());
+            pstmt.setString(6, p.getEmail());
+            pstmt.setString(7, p.getTelefone());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,12 +111,11 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
                 return new Paciente(
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
-                    rs.getInt("idade"),
-                    LocalDate.parse(rs.getString("data_nascimento")),
+                    rs.getString("data_nascimento"),
                     rs.getString("genero"),
-                    rs.getString("telefone"),
+                    rs.getString("cpf"),
                     rs.getString("email"),
-                    rs.getString("cpf")
+                    rs.getString("telefone")
                 );
             }
         } catch (SQLException e) {
@@ -138,12 +134,11 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
                 Paciente p = new Paciente(
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
-                    rs.getInt("idade"),
-                    LocalDate.parse(rs.getString("data_nascimento")),
+                    rs.getString("data_nascimento"),
                     rs.getString("genero"),
-                    rs.getString("telefone"),
+                    rs.getString("cpf"),
                     rs.getString("email"),
-                    rs.getString("cpf")
+                    rs.getString("telefone")
                 );
                 pacientes.add(p);
             }

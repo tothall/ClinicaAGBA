@@ -15,6 +15,7 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
      * Creates new form JFrameLogin
      */
     public JFrameBuscarPacientes() {
+        this.setExtendedState(JFrameBuscarPacientes.MAXIMIZED_BOTH);
         initComponents();
     }
 

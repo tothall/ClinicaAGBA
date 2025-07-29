@@ -12,15 +12,21 @@ import java.util.ArrayList;
  * @author ezequiel
  */
 public class Medico extends Pessoa {
+    protected int id;
     protected String crm;
     protected String especialidade;
-    protected ArrayList<Consulta> consultas;
     
-    public Medico(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email, String crm, String especialidade) {
-        super(nome, sobrenome, idade, data_nascimento, genero, telefone, email);
+    public Medico(int id, String nome, String sobrenome, String data_nascimento, String genero, String crm, String especialidade, String email, String telefone) {
+        super(nome, sobrenome, data_nascimento, genero, telefone, email);
+        this.id = id;
         this.crm = crm;
         this.especialidade = especialidade;
-        this.consultas = new ArrayList<>();
+    }
+    
+    public Medico(String nome, String sobrenome, String data_nascimento, String genero, String crm, String especialidade, String email, String telefone) {
+        super(nome, sobrenome, data_nascimento, genero, telefone, email);
+        this.crm = crm;
+        this.especialidade = especialidade;
     }
     
     @Override
@@ -33,12 +39,10 @@ public class Medico extends Pessoa {
         return  "\nNome: Dr." + this.nome + this.sobrenome +
                 "\nCRM: " + this.getCrm() +
                 "\nEspecialidade: " + this.getEspecialidade() +
-                "\nIdade: " + this.idade +
                 "\nNascimento: " + this.data_nascimento +
                 "\nGênero: " + this.genero +
                 "\nTelefone: " + this.telefone +
-                "\nEmail " + this.email +
-                "\nConsultas: " + this.getConsultas();
+                "\nEmail " + this.email;
     }
 
     /**
@@ -69,19 +73,13 @@ public class Medico extends Pessoa {
         this.especialidade = especialidade;
     }
 
-    /**
-     * @return the consultas
-     */
-    public ArrayList<Consulta> getConsultas() {
-        return consultas;
-    }
-
-    /**
-     * @param consultas the consultas to set
-     */
-    public void setConsultas(ArrayList<Consulta> consultas) {
-        this.consultas = consultas;
+    public void setId(int idGerado) {
+        this.id = idGerado;
     }
     
+    public int getId() {
+        return id;
+    }
+
     
 }
