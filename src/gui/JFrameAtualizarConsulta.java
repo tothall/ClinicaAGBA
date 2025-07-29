@@ -1,4 +1,6 @@
 package gui;
+import gui.JFrameBuscarConsultas;
+import gui.JFrameBuscarMedicos;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Consulta;
@@ -28,7 +30,7 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
         this.consulta = consulta;
         initComponents();
         
-        jTextFieldIDCONSULTA.setText(consulta.getId_consulta());
+        jTextFieldCODIGOCONSULTA.setText(consulta.getCodigo_consulta());
         jTextFieldDATA.setText(consulta.getData_consulta());
         jTextFieldHORARIO.setText(consulta.getHora_consulta());
         jTextFieldCPF.setText(consulta.getId_paciente());
@@ -61,13 +63,13 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
         jTextFieldCPF = new javax.swing.JTextField();
         jTextFieldHORARIO = new javax.swing.JTextField();
         jTextFieldDATA = new javax.swing.JTextField();
-        jTextFieldIDCONSULTA = new javax.swing.JTextField();
+        jTextFieldCODIGOCONSULTA = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setText("ID:");
+        jLabel1.setText("Código:");
 
         jLabel2.setText("Data:");
 
@@ -97,9 +99,9 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldIDCONSULTA.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCODIGOCONSULTA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIDCONSULTAActionPerformed(evt);
+                jTextFieldCODIGOCONSULTAActionPerformed(evt);
             }
         });
 
@@ -137,7 +139,7 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
                             .addComponent(jTextFieldCRM, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextFieldIDCONSULTA, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldCODIGOCONSULTA, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                                     .addComponent(jTextFieldHORARIO, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldDATA))
                                 .addGap(1, 1, 1)))
@@ -151,7 +153,7 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldIDCONSULTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCODIGOCONSULTA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -214,34 +216,37 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente atualizar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
     if (opcao == javax.swing.JOptionPane.YES_OPTION) {
-        String id_consulta = jTextFieldIDCONSULTA.getText();
+        String codigo_consulta = jTextFieldCODIGOCONSULTA.getText();
         String data_consulta = jTextFieldDATA.getText();
         String hora_consulta = jTextFieldHORARIO.getText();
         String id_paciente = jTextFieldCPF.getText();
         String id_medico = jTextFieldCRM.getText();
         String consultorio = jTextFieldCONSULTORIO.getText();
-        
-        Consulta c = new Consulta(id_consulta, data_consulta, id_paciente, id_medico, consultorio, hora_consulta);
-        RepositorioConsulta repositorioConsulta = new RepositorioConsulta();
-            try {
-                repositorioConsulta.adicionar(c);
-            } catch (IdDuplicadoException ex) {
-                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SalaOcupadaException ex) {
-                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (PessoaOcupadoException ex) {
-                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
-        
-        
+        consulta.setCodigo_consulta(codigo_consulta);
+        consulta.setData_consulta(data_consulta);
+        consulta.setHora_consulta(hora_consulta);
+        consulta.setId_paciente(id_paciente);
+        consulta.setId_medico(id_medico);
+        consulta.setConsultorio(consultorio);
+        RepositorioConsulta repositorioConsulta = new RepositorioConsulta();      
+        repositorioConsulta.atualizar(consulta);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            new JFrameBuscarConsultas().setVisible(true);
+                            dispose();
+                        }
+                    });
     }
+        
+        
+        
+        
+    
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextFieldIDCONSULTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDCONSULTAActionPerformed
+    private void jTextFieldCODIGOCONSULTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCODIGOCONSULTAActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIDCONSULTAActionPerformed
+    }//GEN-LAST:event_jTextFieldCODIGOCONSULTAActionPerformed
 
     
 
@@ -256,11 +261,13 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextFieldCODIGOCONSULTA;
     private javax.swing.JTextField jTextFieldCONSULTORIO;
     private javax.swing.JTextField jTextFieldCPF;
     private javax.swing.JTextField jTextFieldCRM;
     private javax.swing.JTextField jTextFieldDATA;
     private javax.swing.JTextField jTextFieldHORARIO;
-    private javax.swing.JTextField jTextFieldIDCONSULTA;
     // End of variables declaration//GEN-END:variables
+
 }
+
