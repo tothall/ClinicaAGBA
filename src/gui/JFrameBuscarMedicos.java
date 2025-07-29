@@ -1,9 +1,14 @@
 package gui;
 
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Medico;
-import repositorios.RepositorioConsulta;
 import repositorios.RepositorioMedico;
 import repositorios.TabelaUtilitariaBD;
 
@@ -50,15 +55,15 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonPESQUISAR = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TEXTO_CRM = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         AREA_DINAMICA = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        BotaoDeletar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,18 +100,18 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Médicos");
 
-        jButton4.setText("Pesquisar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPESQUISAR.setText("Pesquisar");
+        jButtonPESQUISAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonPESQUISARActionPerformed(evt);
             }
         });
 
         jLabel1.setText("CRM");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TEXTO_CRM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TEXTO_CRMActionPerformed(evt);
             }
         });
 
@@ -144,10 +149,10 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setText("Deletar");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        BotaoDeletar.setText("Deletar");
+        BotaoDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                BotaoDeletarActionPerformed(evt);
             }
         });
 
@@ -161,7 +166,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TEXTO_CRM, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton5)
                         .addGap(54, 54, 54)
@@ -169,10 +174,10 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4))
+                        .addComponent(jButtonPESQUISAR))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(jButton9)))
+                        .addComponent(BotaoDeletar)))
                 .addGap(0, 189, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,14 +199,14 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
+                    .addComponent(BotaoDeletar)
                     .addComponent(jButton6)
                     .addComponent(jButton5))
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(TEXTO_CRM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPESQUISAR))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -229,13 +234,34 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonPESQUISARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPESQUISARActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        String crm = TEXTO_CRM.getText();
+        System.out.println(crm);
+        if(crm.isBlank() || crm == null){
+            JFrameBuscarMedicos refresh = new JFrameBuscarMedicos();
+            refresh.setVisible(true);
+            this.dispose();
+        }
+        DefaultTableModel modelo = TabelaUtilitariaBD.filtrarID("medico", crm);
+        System.out.println(modelo);
+        if(modelo.getValueAt(0,0) == null){
+            JOptionPane.showMessageDialog(null, "Médico(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            JFrameBuscarMedicos refresh = new JFrameBuscarMedicos();
+            refresh.setVisible(true);
+            this.dispose();
+        } else{
+            AREA_DINAMICA.setModel(modelo);
+          }
+            
+        
+        
+        
+    }//GEN-LAST:event_jButtonPESQUISARActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TEXTO_CRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEXTO_CRMActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TEXTO_CRMActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
@@ -285,9 +311,73 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void BotaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoDeletarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+        String input = JOptionPane.showInputDialog(this, "Digite o CRM do(a) médico(a):");
+    if (input == null || input.isBlank()) {
+        return;
+    }
+
+    RepositorioMedico repositorio = new RepositorioMedico();
+    Medico m = repositorio.buscar(input);
+
+    if (m == null) {
+        JOptionPane.showMessageDialog(null, "Médico(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    JFrame frame = new JFrame("Confirmar Exclusão de Médico");
+    frame.setSize(500, 200);
+    frame.setLocationRelativeTo(null);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+    
+    String[] colunas = {"CRM", "Nome", "Sobrenome", "Genero", "Especialidade"};
+    Object[][] dados = {
+        {m.getCrm(), m.getNome(), m.getSobrenome(), m.getGenero(), m.getEspecialidade()}
+    };
+
+    JTable tabela = new JTable(new DefaultTableModel(dados, colunas) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    });
+
+    JScrollPane scroll = new JScrollPane(tabela);
+
+   
+    JButton Deletar = new JButton("Deletar");
+    JButton Cancelar = new JButton("Cancelar");
+
+    Deletar.addActionListener(e -> {
+        int confirmacao = JOptionPane.showConfirmDialog(frame,
+                "Tem certeza que deseja deletar este(a) médico(a)?",
+                "Confirmar Deleção",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            repositorio.remover(input);
+            JOptionPane.showMessageDialog(frame, "Médico(a) deletado(a) com sucesso!");
+            JFrameBuscarMedicos novaTela = new JFrameBuscarMedicos();
+            novaTela.setVisible(true);
+            this.dispose();
+            frame.dispose();
+        }
+    });
+
+    Cancelar.addActionListener(e -> frame.dispose());
+
+    JPanel painelBotoes = new JPanel();
+    painelBotoes.add(Deletar);
+    painelBotoes.add(Cancelar);
+
+    frame.setLayout(new BorderLayout());
+    frame.add(scroll, BorderLayout.CENTER);
+    frame.add(painelBotoes, BorderLayout.SOUTH);
+    frame.setVisible(true);
+        
+    }//GEN-LAST:event_BotaoDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,13 +447,14 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AREA_DINAMICA;
+    private javax.swing.JButton BotaoDeletar;
+    private javax.swing.JTextField TEXTO_CRM;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonPESQUISAR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -371,6 +462,5 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
