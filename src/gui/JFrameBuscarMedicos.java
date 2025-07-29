@@ -1,4 +1,12 @@
 package gui;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.Medico;
+import repositorios.RepositorioConsulta;
+import repositorios.RepositorioMedico;
+import repositorios.TabelaUtilitariaBD;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,8 +22,17 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
      * Creates new form JFrameLogin
      */
     public JFrameBuscarMedicos() {
+        this.setExtendedState(JFrameBuscarMedicos.MAXIMIZED_BOTH);
         initComponents();
+        
+        exibirMedicos();
     }
+    
+    private void exibirMedicos() {
+        
+        DefaultTableModel modelo = TabelaUtilitariaBD.listar("medico");
+        AREA_DINAMICA.setModel(modelo);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +54,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        AREA_DINAMICA = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -93,7 +110,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        AREA_DINAMICA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -104,7 +121,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(AREA_DINAMICA);
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +266,23 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        String input = JOptionPane.showInputDialog(this, "Digite o CRM do(a) médico(a):");
+        if(input.isBlank() || input == null){
+            return;
+        }
+        RepositorioMedico repositorio = new RepositorioMedico();
+        Medico m = repositorio.buscar(input);
+        
+        if(m == null){
+            JOptionPane.showMessageDialog(null, "Médico(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JFrameAtualizarMedicos telaAtualizar = new JFrameAtualizarMedicos(m);
+        telaAtualizar.setVisible(true);
+        dispose(); 
+         
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -322,6 +356,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AREA_DINAMICA;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -336,7 +371,6 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

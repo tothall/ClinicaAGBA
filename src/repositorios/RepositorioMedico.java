@@ -28,15 +28,15 @@ public class RepositorioMedico implements IRepositorio<Medico> {
     private void criarTabela() {
         String sql = """
             CREATE TABLE IF NOT EXISTS medico (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
                 sobrenome TEXT NOT NULL,
-                idade INTEGER,
                 data_nascimento TEXT,
                 genero TEXT,
-                telefone TEXT,
+                crm TEXT UNIQUE NOT NULL,
+                especialidade TEXT,
                 email TEXT,
-                crm TEXT PRIMARY KEY,
-                especialidade TEXT
+                telefone TEXT  
             );
         """;
 
@@ -53,45 +53,58 @@ public class RepositorioMedico implements IRepositorio<Medico> {
         throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm());
     }
         String sql = """
-            INSERT INTO medico (nome, sobrenome, idade, data_nascimento, genero, telefone, email, crm, especialidade)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO medico (nome, sobrenome, data_nascimento, genero, crm, especialidade, email, telefone)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
         """;
 
-        try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, m.getNome());
-            pstmt.setString(2, m.getSobrenome());
-            pstmt.setInt(3, m.getIdade());
-            pstmt.setString(4, m.getData_nascimento().toString());
-            pstmt.setString(5, m.getGenero());
-            pstmt.setString(6, m.getTelefone());
-            pstmt.setString(7, m.getEmail());
-            pstmt.setString(8, m.getCrm());
-            pstmt.setString(9, m.getEspecialidade());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+           pstmt.setString(1, m.getNome());
+           pstmt.setString(2, m.getSobrenome());
+           pstmt.setString(3, m.getData_nascimento());
+           pstmt.setString(4, m.getGenero());
+           pstmt.setString(5, m.getCrm());
+           pstmt.setString(6, m.getEspecialidade());
+           pstmt.setString(7, m.getEmail());
+           pstmt.setString(8, m.getTelefone());
+
+           pstmt.executeUpdate();
+
+
+           try (ResultSet rs = pstmt.getGeneratedKeys()) {
+               if (rs.next()) {
+                   int idGerado = rs.getInt(1);
+                   m.setId(idGerado);
+                   System.out.println("ID gerado: " + idGerado);
+               }
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
     }
 
     @Override
     public void atualizar(Medico m) {
         String sql = """
             UPDATE medico SET
-                nome = ?, sobrenome = ?, idade = ?, data_nascimento = ?, genero = ?,
-                telefone = ?, email = ?, especialidade = ?
-            WHERE crm = ?;
+                nome = ?, sobrenome = ?, data_nascimento = ?, genero = ?,
+                crm = ?, especialidade = ?, email = ?, telefone = ?
+            WHERE id = ?;
         """;
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, m.getNome());
             pstmt.setString(2, m.getSobrenome());
-            pstmt.setInt(3, m.getIdade());
-            pstmt.setString(4, m.getData_nascimento().toString());
-            pstmt.setString(5, m.getGenero());
-            pstmt.setString(6, m.getTelefone());
+            pstmt.setString(3, m.getData_nascimento());
+            pstmt.setString(4, m.getGenero());
+            pstmt.setString(5, m.getCrm());
+            pstmt.setString(6, m.getEspecialidade());
             pstmt.setString(7, m.getEmail());
-            pstmt.setString(8, m.getEspecialidade());
-            pstmt.setString(9, m.getCrm()); // Onde crm = ?
+            pstmt.setString(8, m.getTelefone());
+            pstmt.setInt(9, m.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,15 +132,15 @@ public class RepositorioMedico implements IRepositorio<Medico> {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Medico(
+                    rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
-                    rs.getInt("idade"),
-                    LocalDate.parse(rs.getString("data_nascimento")),
+                    rs.getString("data_nascimento"),
                     rs.getString("genero"),
-                    rs.getString("telefone"),
-                    rs.getString("email"),
                     rs.getString("crm"),
-                    rs.getString("especialidade")
+                    rs.getString("especialidade"),
+                    rs.getString("email"),
+                    rs.getString("telefone")
                 );
             }
         } catch (SQLException e) {
@@ -144,15 +157,15 @@ public class RepositorioMedico implements IRepositorio<Medico> {
         try (Connection conn = Conexao.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Medico m = new Medico(
+                    rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
-                    rs.getInt("idade"),
-                    LocalDate.parse(rs.getString("data_nascimento")),
+                    rs.getString("data_nascimento"),
                     rs.getString("genero"),
-                    rs.getString("telefone"),
-                    rs.getString("email"),
                     rs.getString("crm"),
-                    rs.getString("especialidade")
+                    rs.getString("especialidade"),
+                    rs.getString("email"),
+                    rs.getString("telefone")
                 );
                 medicos.add(m);
             }

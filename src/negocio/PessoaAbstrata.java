@@ -13,16 +13,15 @@ import java.time.LocalDate;
 public abstract class PessoaAbstrata<T> implements IVerificarPessoa<T> {
     protected String nome;
     protected String sobrenome;
-    protected int idade;
-    protected LocalDate data_nascimento;
+    protected String data_nascimento;
     protected String genero;
     protected String telefone;
     protected String email;
     
-    public PessoaAbstrata(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email) {
+    public PessoaAbstrata(String nome, String sobrenome, String data_nascimento, String genero, String telefone, String email) {
+       
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.idade = idade;
         this.data_nascimento = data_nascimento;
         this.genero = genero;
         this.telefone = telefone;
@@ -37,7 +36,6 @@ public abstract class PessoaAbstrata<T> implements IVerificarPessoa<T> {
     @Override
     public String toString() {
         return  "\nNome: " + this.nome + this.sobrenome +
-                "\nIdade: " + this.idade +
                 "\nNascimento: " + this.data_nascimento +
                 "\nGênero: " + this.genero +
                 "\nTelefone: " + this.telefone +
@@ -73,30 +71,16 @@ public abstract class PessoaAbstrata<T> implements IVerificarPessoa<T> {
     }
 
     /**
-     * @return the idade
-     */
-    public int getIdade() {
-        return idade;
-    }
-
-    /**
-     * @param idade the idade to set
-     */
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    /**
      * @return the data_nascimento
      */
-    public LocalDate getData_nascimento() {
+    public String getData_nascimento() {
         return data_nascimento;
     }
 
     /**
      * @param data_nascimento the data_nascimento to set
      */
-    public void setData_nascimento(LocalDate data_nascimento) {
+    public void setData_nascimento(String data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
 

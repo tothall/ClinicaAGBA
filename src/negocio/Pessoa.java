@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class Pessoa extends PessoaAbstrata<String> {
     
-    public Pessoa(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email) {
-        super(nome, sobrenome, idade, data_nascimento, genero, telefone, email);
+    public Pessoa(String nome, String sobrenome, String data_nascimento, String genero, String telefone, String email) {
+        super(nome, sobrenome, data_nascimento, genero, telefone, email);
     }
     
     @Override
@@ -24,7 +24,6 @@ public class Pessoa extends PessoaAbstrata<String> {
     @Override
     public String toString() {
         return  "\nNome: " + this.nome + this.sobrenome +
-                "\nIdade: " + this.idade +
                 "\nNascimento: " + this.data_nascimento +
                 "\nGênero: " + this.genero +
                 "\nTelefone: " + this.telefone +

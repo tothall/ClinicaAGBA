@@ -12,13 +12,18 @@ import java.util.ArrayList;
  * @author ezequiel
  */
 public class Paciente extends Pessoa {
+    protected int id;
     protected String cpf;
-    protected ArrayList<Consulta> consultas;
     
-    public Paciente(String nome, String sobrenome, int idade, LocalDate data_nascimento, String genero, String telefone, String email, String cpf) {
-        super(nome, sobrenome, idade, data_nascimento, genero, telefone, email);
+    public Paciente(int id, String nome, String sobrenome, String data_nascimento, String genero, String telefone, String email, String cpf) {
+        super(nome, sobrenome, data_nascimento, genero, telefone, email);
+        this.id = id;
         this.cpf = cpf;
-        this.consultas = new ArrayList<>();
+    }
+    
+    public Paciente(String nome, String sobrenome, String data_nascimento, String genero, String telefone, String email, String cpf) {
+        super(nome, sobrenome, data_nascimento, genero, telefone, email);
+        this.cpf = cpf;
     }
     
     @Override
@@ -30,12 +35,10 @@ public class Paciente extends Pessoa {
     public String toString() {
         return  "\nNome: " + this.nome + this.sobrenome +
                 "\nCPF: " + this.getCpf() +
-                "\nIdade: " + this.idade +
                 "\nNascimento: " + this.data_nascimento +
                 "\nGênero: " + this.genero +
                 "\nTelefone: " + this.telefone +
-                "\nEmail " + this.email +
-                "\nConsultas: " + this.getConsultas();
+                "\nEmail " + this.email;
     }
 
     /**
@@ -51,20 +54,5 @@ public class Paciente extends Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-    /**
-     * @return the consultas
-     */
-    public ArrayList<Consulta> getConsultas() {
-        return consultas;
-    }
-
-    /**
-     * @param consultas the consultas to set
-     */
-    public void setConsultas(ArrayList<Consulta> consultas) {
-        this.consultas = consultas;
-    }
-    
     
 }

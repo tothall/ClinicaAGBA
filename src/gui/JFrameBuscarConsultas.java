@@ -17,6 +17,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
      * Creates new form JFrameLogin
      */
     public JFrameBuscarConsultas() {
+        this.setExtendedState(JFrameBuscarConsultas.MAXIMIZED_BOTH);
         initComponents();
     }
 
@@ -253,13 +254,17 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here: AQUIIIII
         String input = JOptionPane.showInputDialog(this, "Digite o ID da consulta:");
+        if (input == null || input.isBlank()) {
+        return;
+        }
         RepositorioConsulta repositorio = new RepositorioConsulta();
         Consulta c = repositorio.buscar(input);
-        
         if(c == null){
             JOptionPane.showMessageDialog(null, "Usuário não encontrado", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-        
+        JFrameAtualizarConsulta telaAtualizar = new JFrameAtualizarConsulta(c);
+        telaAtualizar.setVisible(true);
+        dispose(); 
         
         
         
