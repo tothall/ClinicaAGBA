@@ -3,7 +3,11 @@ import gui.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.IdDuplicadoException;
+
+import negocio.Medico;
 import negocio.Paciente;
+import repositorios.RepositorioMedico;
+
 import repositorios.RepositorioPaciente;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -43,13 +47,15 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldContato = new javax.swing.JTextField();
-        jTextFieldCpf = new javax.swing.JTextField();
-        jTextFieldGenero = new javax.swing.JTextField();
-        jTextFieldNascimento = new javax.swing.JTextField();
-        jTextFieldSobrenome = new javax.swing.JTextField();
-        jTextFieldNome = new javax.swing.JTextField();
+
+        TEXTO_EMAIL = new javax.swing.JTextField();
+        TEXTO_CONTATO = new javax.swing.JTextField();
+        TEXTO_CPF = new javax.swing.JTextField();
+        TEXTO_GENERO = new javax.swing.JTextField();
+        TEXTO_NASCIMENTO = new javax.swing.JTextField();
+        TEXTO_SOBRENOME = new javax.swing.JTextField();
+        TEXTO_NOME = new javax.swing.JTextField();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,7 +84,7 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
 
         jLabel8.setText("Email:");
 
-        jLabel9.setText("Contato:");
+        jLabel9.setText("Telefone:");
 
         jButton3.setText("Cadastrar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -87,11 +93,7 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeActionPerformed(evt);
-            }
-        });
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,11 +115,13 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(56, 56, 56)
-                                .addComponent(jTextFieldContato))
+
+                                .addComponent(TEXTO_CONTATO))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(70, 70, 70)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TEXTO_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -127,14 +131,16 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
                                     .addComponent(jLabel8))
                                 .addGap(23, 23, 23)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldEmail)
+
+                                    .addComponent(TEXTO_EMAIL)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextFieldSobrenome)
+                                        .addComponent(TEXTO_SOBRENOME)
                                         .addGap(1, 1, 1))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldGenero)
-                                        .addComponent(jTextFieldCpf)))))
+                                        .addComponent(TEXTO_NASCIMENTO, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                                        .addComponent(TEXTO_GENERO)
+                                        .addComponent(TEXTO_CPF)))))
+
                         .addGap(376, 376, 376))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,31 +151,35 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+                    .addComponent(TEXTO_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_SOBRENOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_NASCIMENTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_GENERO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TEXTO_EMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jTextFieldContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+                    .addComponent(TEXTO_CONTATO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -211,21 +221,21 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente cadastrar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
 
+    
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
-            String nome = jTextFieldNome.getText();
-            String sobrenome = jTextFieldSobrenome.getText();
-            String cpf = jTextFieldCpf.getText();
-            String nascimento = jTextFieldNascimento.getText();
-            String genero = jTextFieldGenero.getText();
-            String email = jTextFieldEmail.getText();
-            String contato = jTextFieldContato.getText();
+            String nome = TEXTO_NOME.getText();
+            String sobrenome = TEXTO_SOBRENOME.getText();
+            String nascimento = TEXTO_NASCIMENTO.getText();
+            String genero = TEXTO_GENERO.getText();
+            String cpf = TEXTO_CPF.getText();
+            String email = TEXTO_EMAIL.getText();
+            String contato = TEXTO_CONTATO.getText();
         
-            Paciente p = new Paciente(nome, sobrenome, nascimento, genero, contato, email, cpf);
-            System.out.println(p);
+            Paciente m = new Paciente(nome, sobrenome, nascimento, genero, contato, email, cpf);
             RepositorioPaciente repositorio = new RepositorioPaciente();
-            
             try {
-                repositorio.adicionar(p);
+                repositorio.adicionar(m);
+
                 util.Popup.show(this,"SUCESSO! AGUARDE...");
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
@@ -234,15 +244,14 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
                     }
                 });
             } catch (IdDuplicadoException ex) {
-                Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+
+                Logger.getLogger(JFrameCadastrarPacientes.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,6 +320,13 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TEXTO_CONTATO;
+    private javax.swing.JTextField TEXTO_CPF;
+    private javax.swing.JTextField TEXTO_EMAIL;
+    private javax.swing.JTextField TEXTO_GENERO;
+    private javax.swing.JTextField TEXTO_NASCIMENTO;
+    private javax.swing.JTextField TEXTO_NOME;
+    private javax.swing.JTextField TEXTO_SOBRENOME;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -322,12 +338,7 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldContato;
-    private javax.swing.JTextField jTextFieldCpf;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldGenero;
-    private javax.swing.JTextField jTextFieldNascimento;
-    private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldSobrenome;
+
+
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,7 @@
 package gui;
 
+import gui.*;
+
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,7 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import negocio.Medico;
 import negocio.Paciente;
+import repositorios.RepositorioMedico;
 import repositorios.RepositorioPaciente;
 import repositorios.TabelaUtilitariaBD;
 
@@ -29,7 +34,8 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
     public JFrameBuscarPacientes() {
         this.setExtendedState(JFrameBuscarPacientes.MAXIMIZED_BOTH);
         initComponents();
-        
+
+
         exibirPacientes();
     }
     
@@ -206,7 +212,9 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TEXTO_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPESQUISAR))
+
+                    .addComponent(jButton4))
+
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -246,18 +254,18 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
         DefaultTableModel modelo = TabelaUtilitariaBD.filtrarID("paciente", cpf);
         System.out.println(modelo);
         if(modelo.getValueAt(0,0) == null){
-            JOptionPane.showMessageDialog(null, "Paciente(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Paciente não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
+
             JFrameBuscarPacientes refresh = new JFrameBuscarPacientes();
             refresh.setVisible(true);
             this.dispose();
         } else{
             AREA_DINAMICA.setModel(modelo);
           }
-            
-        
-        
-        
-    }//GEN-LAST:event_jButtonPESQUISARActionPerformed
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     private void TEXTO_CPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEXTO_CPFActionPerformed
         // TODO add your handling code here:
@@ -292,92 +300,97 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String input = JOptionPane.showInputDialog(this, "Digite o CPF do( paciente:");
+
+        String input = JOptionPane.showInputDialog(this, "Digite o CPF do(a) paciente:");
+
         if(input.isBlank() || input == null){
             return;
         }
         RepositorioPaciente repositorio = new RepositorioPaciente();
-        Paciente p = repositorio.buscar(input);
+
+        Paciente m = repositorio.buscar(input);
         
-        if(p == null){
+        if(m == null){
+
             JOptionPane.showMessageDialog(null, "Paciente não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        JFrameAtualizarPacientes telaAtualizar = new JFrameAtualizarPacientes(p);
+
+        JFrameAtualizarPacientes telaAtualizar = new JFrameAtualizarPacientes(m);
         telaAtualizar.setVisible(true);
         dispose(); 
-         
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void BotaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoDeletarActionPerformed
         // TODO add your handling code here:
-        String input = JOptionPane.showInputDialog(this, "Digite o CRM do(a) paciente:");
-    if (input == null || input.isBlank()) {
-        return;
-    }
 
-    RepositorioPaciente repositorio = new RepositorioPaciente();
-    Paciente m = repositorio.buscar(input);
-
-    if (m == null) {
-        JOptionPane.showMessageDialog(null, "Paciente(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    JFrame frame = new JFrame("Confirmar Exclusão de Médico");
-    frame.setSize(500, 200);
-    frame.setLocationRelativeTo(null);
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-    
-    String[] colunas = {"CPF", "Nome", "Sobrenome", "Nascimento", "Genero", "Telefone", "Email"};
-    Object[][] dados = {
-        {m.getCpf(), m.getNome(), m.getSobrenome(), m.getGenero(), m.getGenero(), m.getTelefone(), m.getEmail()}
-    };
-
-    JTable tabela = new JTable(new DefaultTableModel(dados, colunas) {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
+        String input = JOptionPane.showInputDialog(this, "Digite o CPF do(a) paciente:");
+        if (input == null || input.isBlank()) {
+            return;
         }
-    });
 
-    JScrollPane scroll = new JScrollPane(tabela);
+        RepositorioPaciente repositorio = new RepositorioPaciente();
+        Paciente m = repositorio.buscar(input);
 
-   
-    JButton Deletar = new JButton("Deletar");
-    JButton Cancelar = new JButton("Cancelar");
-
-    Deletar.addActionListener(e -> {
-        int confirmacao = JOptionPane.showConfirmDialog(frame,
-                "Tem certeza que deseja deletar este(a) paciente?",
-                "Confirmar Deleção",
-                JOptionPane.YES_NO_OPTION);
-
-        if (confirmacao == JOptionPane.YES_OPTION) {
-            repositorio.remover(input);
-            JOptionPane.showMessageDialog(frame, "Paciente deletado(a) com sucesso!");
-            JFrameBuscarPacientes novaTela = new JFrameBuscarPacientes();
-            novaTela.setVisible(true);
-            this.dispose();
-            frame.dispose();
+        if (m == null) {
+            JOptionPane.showMessageDialog(null, "Paciente não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-    });
 
-    Cancelar.addActionListener(e -> frame.dispose());
+        JFrame frame = new JFrame("Confirmar Exclusão de Paciente");
+        frame.setSize(500, 200);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-    JPanel painelBotoes = new JPanel();
-    painelBotoes.add(Deletar);
-    painelBotoes.add(Cancelar);
 
-    frame.setLayout(new BorderLayout());
-    frame.add(scroll, BorderLayout.CENTER);
-    frame.add(painelBotoes, BorderLayout.SOUTH);
-    frame.setVisible(true);
-        
-    }//GEN-LAST:event_BotaoDeletarActionPerformed
+        String[] colunas = {"CPF", "Nome", "Sobrenome", "Genero", "Email"};
+        Object[][] dados = {
+            {m.getCpf(), m.getNome(), m.getSobrenome(), m.getGenero(), m.getEmail()}
+        };
+
+        JTable tabela = new JTable(new DefaultTableModel(dados, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+
+        JScrollPane scroll = new JScrollPane(tabela);
+
+
+        JButton Deletar = new JButton("Deletar");
+        JButton Cancelar = new JButton("Cancelar");
+
+        Deletar.addActionListener(e -> {
+            int confirmacao = JOptionPane.showConfirmDialog(frame,
+                    "Tem certeza que deseja deletar este(a) paciente?",
+                    "Confirmar Deleção",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirmacao == JOptionPane.YES_OPTION) {
+                repositorio.remover(input);
+                JOptionPane.showMessageDialog(frame, "Paciente deletado(a) com sucesso!");
+                JFrameBuscarPacientes novaTela = new JFrameBuscarPacientes();
+                novaTela.setVisible(true);
+                this.dispose();
+                frame.dispose();
+            }
+        });
+
+        Cancelar.addActionListener(e -> frame.dispose());
+
+        JPanel painelBotoes = new JPanel();
+        painelBotoes.add(Deletar);
+        painelBotoes.add(Cancelar);
+
+        frame.setLayout(new BorderLayout());
+        frame.add(scroll, BorderLayout.CENTER);
+        frame.add(painelBotoes, BorderLayout.SOUTH);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -478,7 +491,7 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AREA_DINAMICA;
-    private javax.swing.JButton BotaoDeletar;
+
     private javax.swing.JTextField TEXTO_CPF;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;

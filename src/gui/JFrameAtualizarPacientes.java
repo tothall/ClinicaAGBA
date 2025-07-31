@@ -1,9 +1,8 @@
 package gui;
 import gui.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import negocio.IdDuplicadoException;
-import negocio.Medico;
+
+
+
 import negocio.Paciente;
 import repositorios.RepositorioMedico;
 import repositorios.RepositorioPaciente;
@@ -17,24 +16,27 @@ import repositorios.RepositorioPaciente;
  * @author lucas
  */
 public class JFrameAtualizarPacientes extends javax.swing.JFrame {
-    private Paciente paciente;
+
+    Paciente paciente;
+
 
     /**
      * Creates new form JFrameLogin
      * @param medico
      */
-    public JFrameAtualizarPacientes(Paciente paciente) {
-        this.paciente = paciente;
+
+    public JFrameAtualizarPacientes(Paciente p) {
+        this.paciente = p;
         initComponents();
         
-        jTextFieldNOME.setText(paciente.getNome());
-        jTextFieldSOBRENOME.setText(paciente.getSobrenome());
-        jTextFieldNASCIMENTO.setText(paciente.getData_nascimento());
-        jTextFieldGENERO.setText(paciente.getGenero());
-        jTextFieldCPF.setText(paciente.getCpf());
-        jTextFieldEMAIL.setText(paciente.getEmail());
-        jTextFieldCONTATO.setText(paciente.getTelefone());
-        
+        TEXTO_NOME.setText(paciente.getNome());
+        TEXTO_SOBRENOME.setText(paciente.getSobrenome());
+        TEXTO_NASCIMENTO.setText(paciente.getData_nascimento());
+        TEXTO_GENERO.setText(paciente.getGenero());
+        TEXTO_CPF.setText(paciente.getCpf());
+        TEXTO_EMAIL.setText(paciente.getEmail());
+        TEXTO_CONTATO.setText(paciente.getTelefone());
+
     }
 
     /**
@@ -55,15 +57,16 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jButtonATUALIZAR = new javax.swing.JButton();
-        jTextFieldEMAIL = new javax.swing.JTextField();
-        jTextFieldCONTATO = new javax.swing.JTextField();
-        jTextFieldCPF = new javax.swing.JTextField();
-        jTextFieldGENERO = new javax.swing.JTextField();
-        jTextFieldNASCIMENTO = new javax.swing.JTextField();
-        jTextFieldSOBRENOME = new javax.swing.JTextField();
-        jTextFieldNOME = new javax.swing.JTextField();
+
+        jButton3 = new javax.swing.JButton();
+        TEXTO_EMAIL = new javax.swing.JTextField();
+        TEXTO_CONTATO = new javax.swing.JTextField();
+        TEXTO_CPF = new javax.swing.JTextField();
+        TEXTO_GENERO = new javax.swing.JTextField();
+        TEXTO_NASCIMENTO = new javax.swing.JTextField();
+        TEXTO_SOBRENOME = new javax.swing.JTextField();
+        TEXTO_NOME = new javax.swing.JTextField();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,26 +93,24 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
 
         jLabel6.setText("CPF:");
 
-        jLabel8.setText("Email:");
 
-        jLabel9.setText("Contato:");
+        jLabel7.setText("Email:");
 
-        jButtonATUALIZAR.setText("Atualizar");
-        jButtonATUALIZAR.addActionListener(new java.awt.event.ActionListener() {
+
+        jLabel8.setText("Telefone:");
+
+        jButton3.setText("Atualizar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonATUALIZARActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
-        jTextFieldEMAIL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEMAILActionPerformed(evt);
-            }
-        });
 
-        jTextFieldNOME.addActionListener(new java.awt.event.ActionListener() {
+        TEXTO_NOME.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNOMEActionPerformed(evt);
+                TEXTO_NOMEActionPerformed(evt);
+
             }
         });
 
@@ -129,30 +130,33 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                         .addComponent(jButtonATUALIZAR)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(70, 70, 70)
-                                .addComponent(jTextFieldNOME, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+
+
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel9)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldEMAIL)
-                                    .addComponent(jTextFieldCONTATO)
-                                    .addComponent(jTextFieldNASCIMENTO)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextFieldCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldGENERO, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldSOBRENOME))
-                                        .addGap(1, 1, 1)))))
+
+                                .addGap(18, 18, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(65, 65, 65)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TEXTO_NOME)
+                            .addComponent(TEXTO_EMAIL, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TEXTO_CONTATO, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TEXTO_NASCIMENTO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                                    .addComponent(TEXTO_SOBRENOME))
+                                .addGap(1, 1, 1))
+                            .addComponent(TEXTO_GENERO, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TEXTO_CPF, javax.swing.GroupLayout.Alignment.LEADING))
+
                         .addGap(376, 376, 376))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,32 +167,34 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldNOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+
+                    .addComponent(TEXTO_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldSOBRENOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_SOBRENOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldNASCIMENTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_NASCIMENTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldGENERO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_GENERO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXTO_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(TEXTO_EMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextFieldEMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextFieldCONTATO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                    .addComponent(TEXTO_CONTATO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVOLTAR)
                     .addComponent(jButtonATUALIZAR))
@@ -225,29 +231,31 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButtonVOLTARActionPerformed
 
-    private void jTextFieldNOMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNOMEActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNOMEActionPerformed
 
-    private void jButtonATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonATUALIZARActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
         // TODO add your handling code here:
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente atualizar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
-            String nome = jTextFieldNOME.getText();
-            String sobrenome = jTextFieldSOBRENOME.getText();
-            String nascimento = jTextFieldNASCIMENTO.getText();
-            String genero = jTextFieldGENERO.getText();
-            String cpf = jTextFieldCPF.getText();
-            String email = jTextFieldEMAIL.getText();
-            String telefone = jTextFieldCONTATO.getText();
+
+            String nome = TEXTO_NOME.getText();
+            String sobrenome = TEXTO_SOBRENOME.getText();
+            String nascimento = TEXTO_NASCIMENTO.getText();
+            String genero = TEXTO_GENERO.getText();
+            String cpf = TEXTO_CPF.getText();
+            String email = TEXTO_EMAIL.getText();
+            String contato = TEXTO_CONTATO.getText();
+
             paciente.setNome(nome);
             paciente.setSobrenome(sobrenome);
             paciente.setData_nascimento(nascimento);
             paciente.setGenero(genero);
             paciente.setCpf(cpf);
             paciente.setEmail(email);
-            paciente.setTelefone(telefone);
+
+            paciente.setTelefone(contato);
+
             RepositorioPaciente repositorio = new RepositorioPaciente();
             repositorio.atualizar(paciente);
             util.Popup.show(this,"SUCESSO! AGUARDE...");
@@ -255,20 +263,116 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                 public void run() {
                     new JFrameBuscarPacientes().setVisible(true);
                     dispose();
+
                 }
             });
             
                 
         }
-    }//GEN-LAST:event_jButtonATUALIZARActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextFieldEMAILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEMAILActionPerformed
+    private void TEXTO_NOMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEXTO_NOMEActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldEMAILActionPerformed
+    }//GEN-LAST:event_TEXTO_NOMEActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            });
+            
+                
+        }
+
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonATUALIZAR;
-    private javax.swing.JButton jButtonVOLTAR;
+    private javax.swing.JTextField TEXTO_CONTATO;
+    private javax.swing.JTextField TEXTO_CPF;
+    private javax.swing.JTextField TEXTO_EMAIL;
+    private javax.swing.JTextField TEXTO_GENERO;
+    private javax.swing.JTextField TEXTO_NASCIMENTO;
+    private javax.swing.JTextField TEXTO_NOME;
+    private javax.swing.JTextField TEXTO_SOBRENOME;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -276,14 +380,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldCONTATO;
-    private javax.swing.JTextField jTextFieldCPF;
-    private javax.swing.JTextField jTextFieldEMAIL;
-    private javax.swing.JTextField jTextFieldGENERO;
-    private javax.swing.JTextField jTextFieldNASCIMENTO;
-    private javax.swing.JTextField jTextFieldNOME;
-    private javax.swing.JTextField jTextFieldSOBRENOME;
+
     // End of variables declaration//GEN-END:variables
 }

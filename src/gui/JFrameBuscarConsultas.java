@@ -1,7 +1,15 @@
 package gui;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import negocio.Consulta;
 import repositorios.RepositorioConsulta;
+import repositorios.TabelaUtilitariaBD;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -19,7 +27,15 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     public JFrameBuscarConsultas() {
         this.setExtendedState(JFrameBuscarConsultas.MAXIMIZED_BOTH);
         initComponents();
+        
+        exibirConsultas();
     }
+    
+    private void exibirConsultas() {
+        
+        DefaultTableModel modelo = TabelaUtilitariaBD.listar("consulta");
+        AREA_DINAMICA.setModel(modelo);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +57,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        AREA_DINAMICA = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -89,7 +105,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("ID");
+        jLabel1.setText("Código:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +113,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        AREA_DINAMICA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -108,7 +124,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(AREA_DINAMICA);
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +159,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addGap(147, 147, 147)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -160,7 +176,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(jButton9)))
-                .addGap(0, 178, Short.MAX_VALUE))
+                .addGap(0, 172, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -235,7 +251,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameBuscarConsultas().setVisible(true);
+                new JFrameMenu().setVisible(true);
                 dispose();
             }
         });
@@ -253,7 +269,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here: AQUIIIII
-        String input = JOptionPane.showInputDialog(this, "Digite o ID da consulta:");
+        String input = JOptionPane.showInputDialog(this, "Digite o código da consulta:");
         if (input == null || input.isBlank()) {
         return;
         }
@@ -261,6 +277,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
         Consulta c = repositorio.buscar(input);
         if(c == null){
             JOptionPane.showMessageDialog(null, "Consulta não encontrada", "ERRO", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         JFrameAtualizarConsulta telaAtualizar = new JFrameAtualizarConsulta(c);
         telaAtualizar.setVisible(true);
@@ -272,6 +289,70 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        String input = JOptionPane.showInputDialog(this, "Digite o código da consulta:");
+    if (input == null || input.isBlank()) {
+        return;
+    }
+
+    RepositorioConsulta repositorio = new RepositorioConsulta();
+    Consulta m = repositorio.buscar(input);
+
+    if (m == null) {
+        JOptionPane.showMessageDialog(null, "Consulta não encontrada", "ERRO", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    JFrame frame = new JFrame("Confirmar Exclusão da Consulta");
+    frame.setSize(500, 200);
+    frame.setLocationRelativeTo(null);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+    
+    String[] colunas = {"Código", "Data", "Hora", "Médico", "Paciente"};
+    Object[][] dados = {
+        {m.getCodigo_consulta(), m.getData_consulta(), m.getHora_consulta(), m.getId_medico(), m.getId_paciente()}
+    };
+
+    JTable tabela = new JTable(new DefaultTableModel(dados, colunas) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    });
+
+    JScrollPane scroll = new JScrollPane(tabela);
+
+   
+    JButton Deletar = new JButton("Deletar");
+    JButton Cancelar = new JButton("Cancelar");
+
+    Deletar.addActionListener(e -> {
+        int confirmacao = JOptionPane.showConfirmDialog(frame,
+                "Tem certeza que deseja deletar esta consulta?",
+                "Confirmar Deleção",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            repositorio.remover(input);
+            JOptionPane.showMessageDialog(frame, "Consulta deletada com sucesso!");
+            JFrameBuscarMedicos novaTela = new JFrameBuscarMedicos();
+            novaTela.setVisible(true);
+            this.dispose();
+            frame.dispose();
+        }
+    });
+
+    Cancelar.addActionListener(e -> frame.dispose());
+
+    JPanel painelBotoes = new JPanel();
+    painelBotoes.add(Deletar);
+    painelBotoes.add(Cancelar);
+
+    frame.setLayout(new BorderLayout());
+    frame.add(scroll, BorderLayout.CENTER);
+    frame.add(painelBotoes, BorderLayout.SOUTH);
+    frame.setVisible(true);
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
@@ -373,6 +454,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AREA_DINAMICA;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -387,7 +469,6 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
