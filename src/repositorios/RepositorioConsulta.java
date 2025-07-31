@@ -66,10 +66,10 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         pstmt.setInt(1, c.getId_consulta());
         pstmt.setString(2, c.getCodigo_consulta());
         pstmt.setString(3, c.getData_consulta());
-        pstmt.setString(4, c.getId_paciente());
-        pstmt.setString(5, c.getId_medico());
-        pstmt.setString(6, c.getConsultorio());
-        pstmt.setString(7, c.getHora_consulta());
+        pstmt.setString(4, c.getHora_consulta());
+        pstmt.setString(5, c.getId_paciente());
+        pstmt.setString(6, c.getId_medico());
+        pstmt.setString(7, c.getConsultorio());
         pstmt.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();

@@ -71,12 +71,12 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                                  <Component id="TEXTO_CONTATO" max="32767" attributes="0"/>
+                                  <Component id="jTextField11" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel1" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                  <Component id="TEXTO_NOME" min="-2" pref="306" max="-2" attributes="0"/>
+                                  <Component id="jTextField16" min="-2" pref="306" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -88,15 +88,15 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="TEXTO_EMAIL" max="32767" attributes="0"/>
+                                      <Component id="jTextField10" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="TEXTO_SOBRENOME" max="32767" attributes="0"/>
+                                          <Component id="jTextField15" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="TEXTO_NASCIMENTO" alignment="0" pref="306" max="32767" attributes="0"/>
-                                          <Component id="TEXTO_GENERO" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="TEXTO_CPF" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextField14" alignment="0" pref="306" max="32767" attributes="0"/>
+                                          <Component id="jTextField13" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextField12" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -115,37 +115,37 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_NOME" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField16" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_SOBRENOME" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField15" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_NASCIMENTO" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField14" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_GENERO" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField13" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField12" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="TEXTO_EMAIL" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_CONTATO" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField11" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="84" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -207,30 +207,27 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Telefone:"/>
+            <Property name="text" type="java.lang.String" value="Contato:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_EMAIL">
+        <Component class="javax.swing.JTextField" name="jTextField10">
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_CONTATO">
+        <Component class="javax.swing.JTextField" name="jTextField11">
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_CPF">
+        <Component class="javax.swing.JTextField" name="jTextField12">
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_GENERO">
+        <Component class="javax.swing.JTextField" name="jTextField13">
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_NASCIMENTO">
+        <Component class="javax.swing.JTextField" name="jTextField14">
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_SOBRENOME">
+        <Component class="javax.swing.JTextField" name="jTextField15">
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_NOME">
+        <Component class="javax.swing.JTextField" name="jTextField16">
         </Component>
       </SubComponents>
     </Container>
