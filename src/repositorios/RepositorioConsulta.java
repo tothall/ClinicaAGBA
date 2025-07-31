@@ -5,12 +5,8 @@
 package repositorios;
 import dados.Conexao;
 import negocio.Consulta;
-import negocio.Medico;
-import negocio.Paciente;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.IdDuplicadoException;
@@ -32,7 +28,8 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         
         String sql = """
             CREATE TABLE IF NOT EXISTS consulta (
-                id_consulta TEXT PRIMARY KEY,
+                id_consulta INTEGER PRIMARY KEY AUTOINCREMENT,
+                codigo_consulta TEXT UNIQUE NOT NULL,
                 data_consulta TEXT NOT NULL,
                 id_paciente TEXT NOT NULL,
                 id_medico TEXT NOT NULL,
@@ -56,8 +53,8 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         verificarConflitoSala(c);
         verificarPessoaOcupada(c.getId_medico(), c.getId_paciente(), c.getData_consulta(), c.getHora_consulta());
         String sqlInsert = """
-            INSERT INTO consulta (id_consulta, data_consulta, id_paciente, id_medico, consultorio, hora_consulta)
-            VALUES (?, ?, ?, ?, ?, ?);
+            INSERT INTO consulta (id_consulta, codigo_consulta, data_consulta, id_paciente, id_medico, consultorio, hora_consulta)
+            VALUES (?, ?, ?, ?, ?, ?, ?);
         """;
 
         String sql = """
@@ -66,12 +63,13 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
     """;
 
     try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sqlInsert)) {
-        pstmt.setString(1, c.getId_consulta());
-        pstmt.setString(2, c.getData_consulta());
-        pstmt.setString(3, c.getHora_consulta());
-        pstmt.setString(4, c.getId_paciente());
-        pstmt.setString(5, c.getId_medico());
-        pstmt.setString(6, c.getConsultorio());
+        pstmt.setInt(1, c.getId_consulta());
+        pstmt.setString(2, c.getCodigo_consulta());
+        pstmt.setString(3, c.getData_consulta());
+        pstmt.setString(4, c.getHora_consulta());
+        pstmt.setString(5, c.getId_paciente());
+        pstmt.setString(6, c.getId_medico());
+        pstmt.setString(7, c.getConsultorio());
         pstmt.executeUpdate();
     } catch (SQLException e) {
         e.printStackTrace();
@@ -82,17 +80,18 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
     public void atualizar(Consulta c) {
         String sql = """
             UPDATE consulta SET
-                data_consulta = ?, id_paciente = ?, id_medico = ?, consultorio = ?, hora_consulta = ?
+                codigo_consulta = ?, data_consulta = ?, id_paciente = ?, id_medico = ?, consultorio = ?, hora_consulta = ?
             WHERE id_consulta = ?;
         """;
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, c.getData_consulta());
-            pstmt.setString(2, c.getId_paciente());
-            pstmt.setString(3, c.getId_medico());
-            pstmt.setString(4, c.getConsultorio());
-            pstmt.setString(5, c.getHora_consulta());
-            pstmt.setString(6, c.getId_consulta());
+            pstmt.setString(1, c.getCodigo_consulta());
+            pstmt.setString(2, c.getData_consulta());
+            pstmt.setString(3, c.getId_paciente());
+            pstmt.setString(4, c.getId_medico());
+            pstmt.setString(5, c.getConsultorio());
+            pstmt.setString(6, c.getHora_consulta());
+            pstmt.setInt(7, c.getId_consulta());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,11 +99,11 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
     }
 
     @Override
-    public void remover(String id_consulta) {
-        String sql = "DELETE FROM consulta WHERE id_consulta = ?";
+    public void remover(String codigo_consulta) {
+        String sql = "DELETE FROM consulta WHERE codigo_consulta = ?";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, id_consulta);
+            pstmt.setString(1, codigo_consulta);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,15 +111,16 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
     }
 
     @Override
-    public Consulta buscar(String id_consulta) {
-        String sql = "SELECT * FROM consulta WHERE id_consulta = ?";
+    public Consulta buscar(String codigo_consulta) {
+        String sql = "SELECT * FROM consulta WHERE codigo_consulta = ?";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, id_consulta);
+            pstmt.setString(1, codigo_consulta);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Consulta(
-                    rs.getString("id_consulta"),
+                    rs.getInt("id_consulta"),
+                    rs.getString("codigo_consulta"),
                     rs.getString("data_consulta"),
                     rs.getString("id_paciente"),
                     rs.getString("id_medico"),
@@ -142,7 +142,8 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
         try (Connection conn = Conexao.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Consulta c = new Consulta(
-                    rs.getString("id_consulta"),
+                    rs.getInt("id_consulta"),
+                    rs.getString("codigo_consulta"),
                     rs.getString("data_consulta"),
                     rs.getString("id_paciente"),
                     rs.getString("id_medico"),

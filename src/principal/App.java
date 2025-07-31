@@ -13,6 +13,7 @@ public class App {
             System.out.println("Conexão estabelecida com sucesso!");
 
             Conexao.verificarEstrutura(conexao);
+            Conexao.inicializarTabelas();
 
             java.awt.EventQueue.invokeLater(() -> {
                 new JFrameLogin().setVisible(true);

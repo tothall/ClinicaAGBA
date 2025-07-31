@@ -12,15 +12,26 @@ import java.time.LocalTime;
  * @author ezequiel
  */
 public class Consulta {
-    protected String id_consulta;
+    protected int id_consulta;
+    protected String codigo_consulta;
     protected String data_consulta;
     protected String id_paciente;
     protected String id_medico;
     protected String consultorio;
     protected String hora_consulta;
     
-    public Consulta(String id_consulta, String data_consulta, String id_paciente, String id_medico, String consultorio, String hora_consulta) {
+    public Consulta(int id_consulta, String codigo_consulta, String data_consulta, String id_paciente, String id_medico, String consultorio, String hora_consulta) {
         this.id_consulta = id_consulta;
+        this.codigo_consulta = codigo_consulta;
+        this.data_consulta = data_consulta;
+        this.id_paciente = id_paciente;
+        this.id_medico = id_medico;
+        this.consultorio = consultorio;
+        this.hora_consulta = hora_consulta;
+    }
+    
+    public Consulta(String codigo_consulta, String data_consulta, String id_paciente, String id_medico, String consultorio, String hora_consulta) {
+        this.codigo_consulta = codigo_consulta;
         this.data_consulta = data_consulta;
         this.id_paciente = id_paciente;
         this.id_medico = id_medico;
@@ -46,14 +57,14 @@ public class Consulta {
     /**
      * @return the id_consulta
      */
-    public String getId_consulta() {
+    public int getId_consulta() {
         return id_consulta;
     }
 
     /**
      * @param id_consulta the id_consulta to set
      */
-    public void setId_consulta(String id_consulta) {
+    public void setId_consulta(int id_consulta) {
         this.id_consulta = id_consulta;
     }
 
@@ -125,6 +136,20 @@ public class Consulta {
      */
     public void setHora_consulta(String hora_consulta) {
         this.hora_consulta = hora_consulta;
+    }
+
+    /**
+     * @return the codigo_consulta
+     */
+    public String getCodigo_consulta() {
+        return codigo_consulta;
+    }
+
+    /**
+     * @param codigo_consulta the codigo_consulta to set
+     */
+    public void setCodigo_consulta(String codigo_consulta) {
+        this.codigo_consulta = codigo_consulta;
     }
     
     
