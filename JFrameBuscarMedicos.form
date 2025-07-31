@@ -102,7 +102,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="TEXTO_CPF" min="-2" pref="168" max="-2" attributes="0"/>
+                          <Component id="TEXTO_CRM" min="-2" pref="168" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jButton5" min="-2" max="-2" attributes="0"/>
@@ -120,7 +120,7 @@
                           <Component id="BotaoDeletar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="180" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="189" max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -155,10 +155,8 @@
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TEXTO_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
-
-                      <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-
+                      <Component id="TEXTO_CRM" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonPESQUISAR" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="339" max="-2" attributes="0"/>
@@ -176,7 +174,7 @@
               <Font name="Cantarell" size="24" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Pacientes"/>
+            <Property name="text" type="java.lang.String" value="M&#xe9;dicos"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPESQUISAR">
@@ -189,12 +187,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF:"/>
+            <Property name="text" type="java.lang.String" value="CRM:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TEXTO_CPF">
+        <Component class="javax.swing.JTextField" name="TEXTO_CRM">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TEXTO_CPFActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TEXTO_CRMActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -229,7 +227,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Novo Paciente"/>
+            <Property name="text" type="java.lang.String" value="Novo M&#xe9;dico"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>

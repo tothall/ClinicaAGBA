@@ -61,22 +61,24 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonVOLTAR" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonATUALIZAR" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+
+                         
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel2" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
                                   </Group>
+
                                   <EmptySpace type="separate" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -92,6 +94,7 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="TEXTO_NASCIMENTO" alignment="0" pref="310" max="32767" attributes="0"/>
                                       <Component id="TEXTO_SOBRENOME" max="32767" attributes="0"/>
+
                                   </Group>
                                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               </Group>
@@ -112,42 +115,54 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+
                       <Component id="TEXTO_NOME" min="-2" max="-2" attributes="0"/>
+
                   </Group>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+
                       <Component id="TEXTO_SOBRENOME" alignment="3" min="-2" max="-2" attributes="0"/>
+
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+
                       <Component id="TEXTO_NASCIMENTO" min="-2" max="-2" attributes="0"/>
+
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+
                       <Component id="TEXTO_GENERO" min="-2" max="-2" attributes="0"/>
+
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+
                       <Component id="TEXTO_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TEXTO_EMAIL" alignment="3" min="-2" max="-2" attributes="0"/>
+
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+
                       <Component id="TEXTO_CONTATO" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="78" max="32767" attributes="0"/>
+
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonVOLTAR" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonATUALIZAR" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -174,12 +189,12 @@
             <Property name="text" type="java.lang.String" value="Atualizar Paciente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jButtonVOLTAR">
           <Properties>
             <Property name="text" type="java.lang.String" value="Voltar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVOLTARActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -197,7 +212,9 @@
             <Property name="text" type="java.lang.String" value="CPF:"/>
           </Properties>
         </Component>
+
         <Component class="javax.swing.JLabel" name="jLabel7">
+
           <Properties>
             <Property name="text" type="java.lang.String" value="Email:"/>
           </Properties>
@@ -207,11 +224,12 @@
             <Property name="text" type="java.lang.String" value="Telefone:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jButtonATUALIZAR">
           <Properties>
             <Property name="text" type="java.lang.String" value="Atualizar"/>
           </Properties>
           <Events>
+
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
           </Events>
         </Component>
@@ -230,6 +248,7 @@
         <Component class="javax.swing.JTextField" name="TEXTO_NOME">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TEXTO_NOMEActionPerformed"/>
+
           </Events>
         </Component>
       </SubComponents>

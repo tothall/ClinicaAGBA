@@ -1,5 +1,8 @@
 package gui;
 import gui.*;
+
+
+
 import negocio.Paciente;
 import repositorios.RepositorioMedico;
 import repositorios.RepositorioPaciente;
@@ -13,11 +16,15 @@ import repositorios.RepositorioPaciente;
  * @author lucas
  */
 public class JFrameAtualizarPacientes extends javax.swing.JFrame {
+
     Paciente paciente;
+
 
     /**
      * Creates new form JFrameLogin
+     * @param medico
      */
+
     public JFrameAtualizarPacientes(Paciente p) {
         this.paciente = p;
         initComponents();
@@ -29,6 +36,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         TEXTO_CPF.setText(paciente.getCpf());
         TEXTO_EMAIL.setText(paciente.getEmail());
         TEXTO_CONTATO.setText(paciente.getTelefone());
+
     }
 
     /**
@@ -44,12 +52,12 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonVOLTAR = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+
         jButton3 = new javax.swing.JButton();
         TEXTO_EMAIL = new javax.swing.JTextField();
         TEXTO_CONTATO = new javax.swing.JTextField();
@@ -58,6 +66,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         TEXTO_NASCIMENTO = new javax.swing.JTextField();
         TEXTO_SOBRENOME = new javax.swing.JTextField();
         TEXTO_NOME = new javax.swing.JTextField();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,10 +80,10 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Atualizar Paciente");
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVOLTAR.setText("Voltar");
+        jButtonVOLTAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonVOLTARActionPerformed(evt);
             }
         });
 
@@ -84,7 +93,9 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
 
         jLabel6.setText("CPF:");
 
+
         jLabel7.setText("Email:");
+
 
         jLabel8.setText("Telefone:");
 
@@ -95,9 +106,11 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
             }
         });
 
+
         TEXTO_NOME.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TEXTO_NOMEActionPerformed(evt);
+
             }
         });
 
@@ -112,20 +125,22 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonVOLTAR)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(jButtonATUALIZAR)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+
+
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                                 .addGap(18, 18, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -141,6 +156,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                                 .addGap(1, 1, 1))
                             .addComponent(TEXTO_GENERO, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TEXTO_CPF, javax.swing.GroupLayout.Alignment.LEADING))
+
                         .addGap(376, 376, 376))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,6 +167,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
+
                     .addComponent(TEXTO_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,9 +194,10 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(TEXTO_CONTATO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonVOLTAR)
+                    .addComponent(jButtonATUALIZAR))
                 .addContainerGap())
         );
 
@@ -203,21 +221,24 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonVOLTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVOLTARActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameMenu().setVisible(true);
+                new JFrameBuscarPacientes().setVisible(true);
                 dispose();
             }
         });
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonVOLTARActionPerformed
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
         // TODO add your handling code here:
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente atualizar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
+
             String nome = TEXTO_NOME.getText();
             String sobrenome = TEXTO_SOBRENOME.getText();
             String nascimento = TEXTO_NASCIMENTO.getText();
@@ -225,13 +246,16 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
             String cpf = TEXTO_CPF.getText();
             String email = TEXTO_EMAIL.getText();
             String contato = TEXTO_CONTATO.getText();
+
             paciente.setNome(nome);
             paciente.setSobrenome(sobrenome);
             paciente.setData_nascimento(nascimento);
             paciente.setGenero(genero);
             paciente.setCpf(cpf);
             paciente.setEmail(email);
+
             paciente.setTelefone(contato);
+
             RepositorioPaciente repositorio = new RepositorioPaciente();
             repositorio.atualizar(paciente);
             util.Popup.show(this,"SUCESSO! AGUARDE...");
@@ -239,6 +263,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                 public void run() {
                     new JFrameBuscarPacientes().setVisible(true);
                     dispose();
+
                 }
             });
             
@@ -264,17 +289,13 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            });
+            
+                
         }
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -351,14 +372,15 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
     private javax.swing.JTextField TEXTO_SOBRENOME;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+
     // End of variables declaration//GEN-END:variables
 }
