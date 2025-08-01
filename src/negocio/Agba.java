@@ -45,7 +45,7 @@ public class Agba  implements IAgba {
     public void finalizarSistema() throws UnsupportedOperationException {
         
         try {
-            
+            System.exit(0);
         } catch (UnsupportedOperationException e) {
             JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.ERROR_MESSAGE);
         }

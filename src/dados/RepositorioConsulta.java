@@ -13,6 +13,8 @@ import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 import negocio.PessoaOcupadoException;
 import negocio.SalaOcupadaException;
+import dados.RepositorioPaciente;
+import dados.RepositorioMedico;
 
 /**
  *
@@ -51,8 +53,19 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
 
     @Override
     public void adicionar(Consulta c) throws IdDuplicadoException, SalaOcupadaException, PessoaOcupadoException, IdAusenteException {
+        RepositorioMedico medicos = new RepositorioMedico();
+        RepositorioPaciente pacientes = new RepositorioPaciente();
+        
         if (c.getCodigo_consulta() == null || c.getCodigo_consulta().trim().isEmpty()) {
             throw new IdAusenteException("O código da consulta não pode ser nulo ou vazio.");
+        } else {
+            if(medicos.buscar(c.getId_medico()) == null || c.getId_medico().trim().isEmpty()) {
+                throw new IdAusenteException("O CRM do(a) médico(a) não pode ser nulo ou vazio.");
+            } else {
+                if(pacientes.buscar(c.getId_paciente()) == null || c.getId_paciente().trim().isEmpty()) {
+                    throw new IdAusenteException("O CPF do(a) paciente não pode ser nulo ou vazio.");
+                }
+            }
         }
 
         if (buscar(c.getCodigo_consulta()) != null) {
