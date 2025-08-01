@@ -4,6 +4,7 @@
  */
 package repositorios;
 import java.util.List;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 import negocio.PessoaOcupadoException;
 import negocio.SalaOcupadaException;
@@ -17,7 +18,7 @@ import negocio.SalaOcupadaException;
 
 
 public interface IRepositorio<T> {
-    void adicionar(T objeto)throws IdDuplicadoException, SalaOcupadaException, PessoaOcupadoException;
+    void adicionar(T objeto)throws IdDuplicadoException, IdAusenteException, SalaOcupadaException, PessoaOcupadoException;
     void atualizar(T objeto);
     void remover(String id);       
     T buscar(String id);           

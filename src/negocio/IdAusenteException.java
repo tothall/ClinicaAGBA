@@ -4,17 +4,17 @@
  */
 package negocio;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ezequiel
  */
-import javax.swing.JOptionPane;
-
-public class SalaOcupadaException extends Exception {
-    public SalaOcupadaException(String mensagem) {
+public class IdAusenteException extends Exception {
+    public IdAusenteException(String mensagem){
         super(mensagem);
-        JOptionPane.showMessageDialog(null, mensagem, "ERRO", JOptionPane.ERROR_MESSAGE);
-        return;
+        JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
+        
     }
+    
 }
-

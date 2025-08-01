@@ -2,9 +2,11 @@ package gui;
 import gui.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 import negocio.Medico;
 import negocio.Paciente;
+import negocio.PessoaOcupadoException;
 import repositorios.RepositorioMedico;
 import repositorios.RepositorioPaciente;
 /*
@@ -229,6 +231,8 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
                 });
             } catch (IdDuplicadoException ex) {
                 Logger.getLogger(JFrameCadastrarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IdAusenteException ex) {
+                Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }

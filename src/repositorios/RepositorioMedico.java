@@ -11,6 +11,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 
 /**
@@ -48,7 +49,10 @@ public class RepositorioMedico implements IRepositorio<Medico> {
     }
 
     @Override
-    public void adicionar(Medico m) throws IdDuplicadoException {
+    public void adicionar(Medico m) throws IdDuplicadoException, IdAusenteException {
+        if (m.getCrm() == null || m.getCrm().trim().isEmpty()) {
+            throw new IdAusenteException("CRM não pode ser nulo ou vazio.");
+        }
         if (buscar(m.getCrm()) != null) {
         throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm());
     }

@@ -2,6 +2,7 @@ package gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Consulta;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 import negocio.PessoaOcupadoException;
 import negocio.SalaOcupadaException;
@@ -218,7 +219,16 @@ public class JFrameCadastrarConsulta extends javax.swing.JFrame {
                 Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
             } catch (PessoaOcupadoException ex) {
                 Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IdAusenteException ex) {
+                Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new JFrameBuscarConsultas().setVisible(true);
+                dispose();
+            }
+            });
         
         
         

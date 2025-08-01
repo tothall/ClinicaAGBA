@@ -9,6 +9,7 @@ import negocio.Consulta;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 import negocio.PessoaOcupadoException;
 import negocio.SalaOcupadaException;
@@ -49,7 +50,15 @@ public class RepositorioConsulta implements IRepositorio<Consulta> {
     }
 
     @Override
-    public void adicionar(Consulta c) throws IdDuplicadoException, SalaOcupadaException, PessoaOcupadoException {
+    public void adicionar(Consulta c) throws IdDuplicadoException, SalaOcupadaException, PessoaOcupadoException, IdAusenteException {
+        if (c.getCodigo_consulta() == null || c.getCodigo_consulta().trim().isEmpty()) {
+            throw new IdAusenteException("O código da consulta não pode ser nulo ou vazio.");
+        }
+
+        if (buscar(c.getCodigo_consulta()) != null) {
+            throw new IdDuplicadoException("Código de consulta duplicado: " + c.getCodigo_consulta());
+        }
+
         verificarConflitoSala(c);
         verificarPessoaOcupada(c.getId_medico(), c.getId_paciente(), c.getData_consulta(), c.getHora_consulta());
         String sqlInsert = """
@@ -229,14 +238,15 @@ public void verificarConflitoSala(Consulta c) throws SalaOcupadaException {
     try (Connection conn = Conexao.conectar();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setString(1, c.getData_consulta().toString());
-        stmt.setString(2, c.getHora_consulta().toString());
+        stmt.setString(1, c.getData_consulta());
+        stmt.setString(2, c.getHora_consulta());
         stmt.setString(3, c.getConsultorio());
 
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
             throw new SalaOcupadaException("Já existe uma consulta agendada para essa sala, data e hora.");
+            
         }
 
     } catch (SQLException e) {

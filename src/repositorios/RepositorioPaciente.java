@@ -9,6 +9,7 @@ import negocio.Paciente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 
 /**
@@ -45,10 +46,13 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     }
 
     @Override
-    public void adicionar(Paciente p) throws IdDuplicadoException {
+    public void adicionar(Paciente p) throws IdDuplicadoException, IdAusenteException {
         if (buscar(p.getCpf()) != null) {
-        throw new IdDuplicadoException("CPF já cadastrado: " + p.getCpf());
-    }
+            throw new IdDuplicadoException("CPF já cadastrado: " + p.getCpf());
+        }
+        if (p.getCpf() == null || p.getCpf().trim().isEmpty()) {
+            throw new IdAusenteException("CPF não pode ser nulo ou vazio.");
+        }
         String sql = """
             INSERT INTO paciente (nome, sobrenome, data_nascimento, genero, telefone, email, cpf)
             VALUES (?, ?, ?, ?, ?, ?, ?);
