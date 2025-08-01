@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 import negocio.Medico;
-import repositorios.RepositorioMedico;
+import dados.RepositorioMedico;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

@@ -8,8 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Consulta;
-import repositorios.RepositorioConsulta;
-import repositorios.TabelaUtilitariaBD;
+import dados.RepositorioConsulta;
+import utils.TabelaUtilitariaBD;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template

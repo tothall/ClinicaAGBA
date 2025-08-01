@@ -9,8 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Medico;
-import repositorios.RepositorioMedico;
-import repositorios.TabelaUtilitariaBD;
+import dados.RepositorioMedico;
+import utils.TabelaUtilitariaBD;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

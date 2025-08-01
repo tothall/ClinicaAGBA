@@ -8,9 +8,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.File;
 import javax.swing.JOptionPane;
-import repositorios.RepositorioConsulta;
-import repositorios.RepositorioMedico;
-import repositorios.RepositorioPaciente;
 
 /**
  *

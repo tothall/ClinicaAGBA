@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.IdDuplicadoException;
 import negocio.Medico;
-import repositorios.RepositorioMedico;
+import dados.RepositorioMedico;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -255,7 +255,7 @@ public class JFrameAtualizarMedicos extends javax.swing.JFrame {
             medico.setTelefone(contato);
             RepositorioMedico repositorio = new RepositorioMedico();
             repositorio.atualizar(medico);
-            util.Popup.show(this,"SUCESSO! AGUARDE...");
+            utils.Popup.show(this,"SUCESSO! AGUARDE...");
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new JFrameBuscarMedicos().setVisible(true);

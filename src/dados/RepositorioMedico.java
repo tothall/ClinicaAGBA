@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repositorios;
+package dados;
+
 import dados.Conexao;
-import negocio.Paciente;
+import negocio.Medico;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.IdAusenteException;
@@ -16,25 +18,26 @@ import negocio.IdDuplicadoException;
  *
  * @author ezequiel
  */
-public class RepositorioPaciente implements IRepositorio<Paciente> {
-    public RepositorioPaciente() {
+
+
+public class RepositorioMedico implements IRepositorio<Medico> {
+
+    public RepositorioMedico() {
         criarTabela();
     }
 
     private void criarTabela() {
         String sql = """
-            CREATE TABLE IF NOT EXISTS paciente (
+            CREATE TABLE IF NOT EXISTS medico (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
                 sobrenome TEXT NOT NULL,
                 data_nascimento TEXT,
                 genero TEXT,
-                telefone TEXT,
+                crm TEXT UNIQUE NOT NULL,
+                especialidade TEXT,
                 email TEXT,
-                cpf TEXT UNIQUE NOT NULL
-                
-                
-                
+                telefone TEXT  
             );
         """;
 
@@ -46,59 +49,66 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     }
 
     @Override
-    public void adicionar(Paciente p) throws IdDuplicadoException, IdAusenteException {
-        if (buscar(p.getCpf()) != null) {
-            throw new IdDuplicadoException("CPF já cadastrado: " + p.getCpf());
+    public void adicionar(Medico m) throws IdDuplicadoException, IdAusenteException {
+        if (m.getCrm() == null || m.getCrm().trim().isEmpty()) {
+            throw new IdAusenteException("CRM não pode ser nulo ou vazio.");
         }
-        if (p.getCpf() == null || p.getCpf().trim().isEmpty()) {
-            throw new IdAusenteException("CPF não pode ser nulo ou vazio.");
-        }
+        if (buscar(m.getCrm()) != null) {
+        throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm());
+    }
         String sql = """
-            INSERT INTO paciente (nome, sobrenome, data_nascimento, genero, telefone, email, cpf)
-            VALUES (?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO medico (nome, sobrenome, data_nascimento, genero, crm, especialidade, email, telefone)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?);
         """;
 
-        try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.setString(1, p.getNome());
-            pstmt.setString(2, p.getSobrenome());
-            pstmt.setString(3, p.getData_nascimento());
-            pstmt.setString(4, p.getGenero());
-            pstmt.setString(5, p.getTelefone());
-            pstmt.setString(6, p.getEmail());
-            pstmt.setString(7, p.getCpf());
-            
-            pstmt.executeUpdate();
-            
-            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+        try (Connection conn = Conexao.conectar();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+           pstmt.setString(1, m.getNome());
+           pstmt.setString(2, m.getSobrenome());
+           pstmt.setString(3, m.getData_nascimento());
+           pstmt.setString(4, m.getGenero());
+           pstmt.setString(5, m.getCrm());
+           pstmt.setString(6, m.getEspecialidade());
+           pstmt.setString(7, m.getEmail());
+           pstmt.setString(8, m.getTelefone());
+
+           pstmt.executeUpdate();
+
+
+           try (ResultSet rs = pstmt.getGeneratedKeys()) {
                if (rs.next()) {
                    int idGerado = rs.getInt(1);
-                   p.setId(idGerado);
+                   m.setId(idGerado);
                    System.out.println("ID gerado: " + idGerado);
                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
     }
 
     @Override
-    public void atualizar(Paciente p) {
+    public void atualizar(Medico m) {
         String sql = """
-            UPDATE paciente SET
+            UPDATE medico SET
                 nome = ?, sobrenome = ?, data_nascimento = ?, genero = ?,
-                telefone = ?, email = ?, cpf = ?
+                crm = ?, especialidade = ?, email = ?, telefone = ?
             WHERE id = ?;
         """;
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, p.getNome());
-            pstmt.setString(2, p.getSobrenome());
-            pstmt.setString(3, p.getData_nascimento());
-            pstmt.setString(4, p.getGenero());
-            pstmt.setString(7, p.getCpf());
-            pstmt.setString(6, p.getEmail());
-            pstmt.setString(5, p.getTelefone());
-            pstmt.setInt(8, p.getId());
+            pstmt.setString(1, m.getNome());
+            pstmt.setString(2, m.getSobrenome());
+            pstmt.setString(3, m.getData_nascimento());
+            pstmt.setString(4, m.getGenero());
+            pstmt.setString(5, m.getCrm());
+            pstmt.setString(6, m.getEspecialidade());
+            pstmt.setString(7, m.getEmail());
+            pstmt.setString(8, m.getTelefone());
+            pstmt.setInt(9, m.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,11 +116,11 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     }
 
     @Override
-    public void remover(String cpf) {
-        String sql = "DELETE FROM paciente WHERE cpf = ?";
+    public void remover(String crm) {
+        String sql = "DELETE FROM medico WHERE crm = ?";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, cpf);
+            pstmt.setString(1, crm);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,22 +128,23 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     }
 
     @Override
-    public Paciente buscar(String cpf) {
-        String sql = "SELECT * FROM paciente WHERE cpf = ?";
+    public Medico buscar(String crm) {
+        String sql = "SELECT * FROM medico WHERE crm = ?";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, cpf);
+            pstmt.setString(1, crm);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                return new Paciente(
+                return new Medico(
                     rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
                     rs.getString("data_nascimento"),
                     rs.getString("genero"),
-                    rs.getString("telefone"),
+                    rs.getString("crm"),
+                    rs.getString("especialidade"),
                     rs.getString("email"),
-                    rs.getString("cpf")
+                    rs.getString("telefone")
                 );
             }
         } catch (SQLException e) {
@@ -143,40 +154,41 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     }
 
     @Override
-    public List<Paciente> listar() {
-        List<Paciente> pacientes = new ArrayList<>();
-        String sql = "SELECT * FROM paciente";
+    public List<Medico> listar() {
+        List<Medico> medicos = new ArrayList<>();
+        String sql = "SELECT * FROM medico";
 
         try (Connection conn = Conexao.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                Paciente p = new Paciente(
+                Medico m = new Medico(
                     rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getString("sobrenome"),
                     rs.getString("data_nascimento"),
                     rs.getString("genero"),
-                    rs.getString("telefone"),
+                    rs.getString("crm"),
+                    rs.getString("especialidade"),
                     rs.getString("email"),
-                    rs.getString("cpf")
-                    
+                    rs.getString("telefone")
                 );
-                pacientes.add(p);
+                medicos.add(m);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return pacientes;
+        return medicos;
     }
 
-    public void removerPacientePorCPF(String cpf) {
-        String sql = "DELETE FROM paciente WHERE cpf = ?";
+    public void removerMedicoPorCRM(String crm) {
+        String sql = "DELETE FROM medico WHERE crm = ?";
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, cpf);
+            pstmt.setString(1, crm);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+

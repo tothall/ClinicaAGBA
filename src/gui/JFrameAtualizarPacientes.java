@@ -1,8 +1,8 @@
 package gui;
 import gui.*;
 import negocio.Paciente;
-import repositorios.RepositorioMedico;
-import repositorios.RepositorioPaciente;
+import dados.RepositorioMedico;
+import dados.RepositorioPaciente;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -234,7 +234,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
             paciente.setTelefone(contato);
             RepositorioPaciente repositorio = new RepositorioPaciente();
             repositorio.atualizar(paciente);
-            util.Popup.show(this,"SUCESSO! AGUARDE...");
+            utils.Popup.show(this,"SUCESSO! AGUARDE...");
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new JFrameBuscarPacientes().setVisible(true);

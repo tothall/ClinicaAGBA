@@ -7,8 +7,8 @@ import negocio.IdDuplicadoException;
 import negocio.Medico;
 import negocio.Paciente;
 import negocio.PessoaOcupadoException;
-import repositorios.RepositorioMedico;
-import repositorios.RepositorioPaciente;
+import dados.RepositorioMedico;
+import dados.RepositorioPaciente;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -222,7 +222,7 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
             RepositorioPaciente repositorio = new RepositorioPaciente();
             try {
                 repositorio.adicionar(m);
-                util.Popup.show(this,"SUCESSO! AGUARDE...");
+                utils.Popup.show(this,"SUCESSO! AGUARDE...");
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         new JFrameBuscarPacientes().setVisible(true);
