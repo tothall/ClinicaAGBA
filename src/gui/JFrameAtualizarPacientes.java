@@ -3,6 +3,10 @@ import gui.*;
 import negocio.Paciente;
 import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.IdAusenteException;
+import negocio.IdDuplicadoException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -233,7 +237,13 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
             paciente.setEmail(email);
             paciente.setTelefone(contato);
             RepositorioPaciente repositorio = new RepositorioPaciente();
-            repositorio.atualizar(paciente);
+            try {
+                repositorio.atualizar(paciente);
+            } catch (IdDuplicadoException ex) {
+                Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IdAusenteException ex) {
+                Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
             utils.Popup.show(this,"SUCESSO! AGUARDE...");
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {

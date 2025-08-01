@@ -9,6 +9,8 @@ import negocio.Paciente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 
@@ -82,7 +84,16 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
     }
 
     @Override
-    public void atualizar(Paciente p) {
+    public void atualizar(Paciente p) throws IdDuplicadoException, IdAusenteException {
+        Paciente pPrevio = p;
+        if (buscar(p.getCpf()) != null && pPrevio.getCpf() == p.getCpf()) {
+            
+        } else {
+            throw new IdDuplicadoException("CPF já cadastrado: " + p.getCpf());
+        }
+        if (p.getCpf() == null || p.getCpf().trim().isEmpty()) {
+            throw new IdAusenteException("CPF não pode ser nulo ou vazio.");
+        }
         String sql = """
             UPDATE paciente SET
                 nome = ?, sobrenome = ?, data_nascimento = ?, genero = ?,

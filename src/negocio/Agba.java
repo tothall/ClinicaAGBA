@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  */
 public class Agba  implements IAgba {
     public Agba() {
-        iniciarSistema();
     }
 
     @Override

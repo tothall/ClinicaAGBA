@@ -18,8 +18,8 @@ import negocio.SalaOcupadaException;
 
 
 public interface IRepositorio<T> {
-    void adicionar(T objeto)throws IdDuplicadoException, IdAusenteException, SalaOcupadaException, PessoaOcupadoException;
-    void atualizar(T objeto);
+    void adicionar(T objeto)throws Exception;
+    void atualizar(T objeto)throws Exception;
     void remover(String id);       
     T buscar(String id);           
     List<T> listar();              

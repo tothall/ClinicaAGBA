@@ -4,16 +4,21 @@
  */
 package negocio;
 
+
+
 /**
  *
  * @author ezequiel
  */
-import javax.swing.JOptionPane;
-
-public class SalaOcupadaException extends Exception {
-    public SalaOcupadaException(String mensagem) {
-        super(mensagem);
-        JOptionPane.showMessageDialog(null, mensagem, "ERRO", JOptionPane.ERROR_MESSAGE);
+public abstract class Agba_abstrato implements IAgba{
+    public Agba_abstrato() {
+        iniciarSistema();
     }
+    
+    @Override
+    public abstract void iniciarSistema();
+    
+    @Override
+    public abstract void finalizarSistema();
+    
 }
-
