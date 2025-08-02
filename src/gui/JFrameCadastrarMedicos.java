@@ -6,7 +6,7 @@ import excecoes.IdAusenteException;
 import excecoes.IdDuplicadoException;
 import negocio.Medico;
 import dados.RepositorioMedico;
-import negocio.Agba;
+import controller.Agba;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

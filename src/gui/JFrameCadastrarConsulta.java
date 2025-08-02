@@ -7,7 +7,7 @@ import excecoes.IdDuplicadoException;
 import excecoes.PessoaOcupadoException;
 import excecoes.SalaOcupadaException;
 import dados.RepositorioConsulta;
-import negocio.Agba;
+import controller.Agba;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

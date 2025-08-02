@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Consulta;
 import dados.RepositorioConsulta;
-import negocio.Agba;
+import controller.Agba;
 import utils.TabelaUtilitariaBD;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

@@ -9,7 +9,7 @@ import negocio.Paciente;
 import excecoes.PessoaOcupadoException;
 import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
-import negocio.Agba;
+import controller.Agba;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template

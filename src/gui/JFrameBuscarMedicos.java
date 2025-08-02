@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Medico;
 import dados.RepositorioMedico;
-import negocio.Agba;
+import controller.Agba;
 import utils.TabelaUtilitariaBD;
 
 /*

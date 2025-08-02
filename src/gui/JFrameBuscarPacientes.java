@@ -12,7 +12,7 @@ import negocio.Medico;
 import negocio.Paciente;
 import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
-import negocio.Agba;
+import controller.Agba;
 import utils.TabelaUtilitariaBD;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

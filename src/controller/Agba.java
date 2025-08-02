@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package negocio;
+package controller;
 
 import dados.Conexao;
 import dados.RepositorioConsulta;
@@ -19,6 +19,11 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import negocio.Consulta;
+import negocio.IAgba;
+import negocio.Medico;
+import negocio.Paciente;
+import negocio.Usuario;
 
 /**
  *

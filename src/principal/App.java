@@ -1,6 +1,6 @@
 package principal;
 
-import negocio.Agba;
+import controller.Agba;
 
 
 public class App {
