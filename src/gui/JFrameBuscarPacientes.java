@@ -237,19 +237,18 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         String cpf = TEXTO_CPF.getText();
+        TEXTO_CPF.setText("");
         System.out.println(cpf);
+        DefaultTableModel tabelaCompleta = TabelaUtilitariaBD.listar("medico");
         if(cpf.isBlank() || cpf == null){
-            JFrameBuscarPacientes refresh = new JFrameBuscarPacientes();
-            refresh.setVisible(true);
-            this.dispose();
+            AREA_DINAMICA.setModel(tabelaCompleta);
         }
         DefaultTableModel modelo = TabelaUtilitariaBD.filtrarID("paciente", cpf);
+        
         System.out.println(modelo);
         if(modelo.getValueAt(0,0) == null){
             JOptionPane.showMessageDialog(null, "Paciente não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
-            JFrameBuscarPacientes refresh = new JFrameBuscarPacientes();
-            refresh.setVisible(true);
-            this.dispose();
+            AREA_DINAMICA.setModel(tabelaCompleta);
         } else{
             AREA_DINAMICA.setModel(modelo);
           }

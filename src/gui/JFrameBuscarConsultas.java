@@ -234,6 +234,23 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        String crm = jTextField1.getText();
+        jTextField1.setText("");
+        System.out.println(crm);
+        DefaultTableModel tabelaCompleta = TabelaUtilitariaBD.listar("consulta");
+        if(crm.isBlank() || crm == null){
+            AREA_DINAMICA.setModel(tabelaCompleta);
+        }
+        DefaultTableModel modelo = TabelaUtilitariaBD.filtrarID("consulta", crm);
+        System.out.println(modelo);
+        if(modelo.getValueAt(0,0) == null){
+            JOptionPane.showMessageDialog(null, "Consulta não encontrada", "ERRO", JOptionPane.ERROR_MESSAGE);
+            
+            AREA_DINAMICA.setModel(tabelaCompleta);
+        } else{
+            AREA_DINAMICA.setModel(modelo);
+            
+          }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -335,7 +352,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
         if (confirmacao == JOptionPane.YES_OPTION) {
             repositorio.remover(input);
             JOptionPane.showMessageDialog(frame, "Consulta deletada com sucesso!");
-            JFrameBuscarMedicos novaTela = new JFrameBuscarMedicos();
+            JFrameBuscarConsultas novaTela = new JFrameBuscarConsultas();
             novaTela.setVisible(true);
             this.dispose();
             frame.dispose();

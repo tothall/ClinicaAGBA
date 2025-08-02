@@ -178,7 +178,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(BotaoDeletar)))
-                .addGap(0, 189, Short.MAX_VALUE))
+                .addGap(0, 201, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -218,17 +218,11 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -237,21 +231,21 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
     private void jButtonPESQUISARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPESQUISARActionPerformed
         // TODO add your handling code here:
         String crm = TEXTO_CRM.getText();
+        TEXTO_CRM.setText("");
         System.out.println(crm);
+        DefaultTableModel tabelaCompleta = TabelaUtilitariaBD.listar("medico");
         if(crm.isBlank() || crm == null){
-            JFrameBuscarMedicos refresh = new JFrameBuscarMedicos();
-            refresh.setVisible(true);
-            this.dispose();
+            AREA_DINAMICA.setModel(tabelaCompleta);
         }
         DefaultTableModel modelo = TabelaUtilitariaBD.filtrarID("medico", crm);
         System.out.println(modelo);
         if(modelo.getValueAt(0,0) == null){
             JOptionPane.showMessageDialog(null, "Médico(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
-            JFrameBuscarMedicos refresh = new JFrameBuscarMedicos();
-            refresh.setVisible(true);
-            this.dispose();
+            
+            AREA_DINAMICA.setModel(tabelaCompleta);
         } else{
             AREA_DINAMICA.setModel(modelo);
+            
           }
             
         

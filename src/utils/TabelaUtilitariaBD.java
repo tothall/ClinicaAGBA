@@ -73,7 +73,7 @@ public class TabelaUtilitariaBD {
             busca = "SELECT * FROM " + nomeTabela + " WHERE cpf = ?";
             break;
         case "consulta":
-            busca = "SELECT * FROM " + nomeTabela + " WHERE id_consulta = ?";
+            busca = "SELECT * FROM " + nomeTabela + " WHERE codigo_consulta = ?";
             break;
             
     }
