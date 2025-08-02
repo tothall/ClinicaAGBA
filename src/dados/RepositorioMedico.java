@@ -100,15 +100,14 @@ public class RepositorioMedico implements IRepositorio<Medico> {
      */
     @Override
     public void atualizar(Medico m) throws IdAusenteException, IdDuplicadoException {
-        Medico mPrevio = m;
         if (m.getCrm() == null || m.getCrm().trim().isEmpty()) {
                 throw new IdAusenteException("CRM não pode ser nulo ou vazio.");
             }
         
-        if (buscar(m.getCrm()) != null && mPrevio.getCrm() == m.getCrm()) {
+        if (buscar(m.getCrm()) != null && buscar(m.getCrm()).getId() == m.getId()) {
                 
         } else {
-            throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm()); 
+            throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm());
         }
         String sql = """
             UPDATE medico SET
@@ -151,6 +150,31 @@ public class RepositorioMedico implements IRepositorio<Medico> {
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, crm);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Medico(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("sobrenome"),
+                    rs.getString("data_nascimento"),
+                    rs.getString("genero"),
+                    rs.getString("crm"),
+                    rs.getString("especialidade"),
+                    rs.getString("email"),
+                    rs.getString("telefone")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Medico buscarPorId(int id) {
+        String sql = "SELECT * FROM medico WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Medico(

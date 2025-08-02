@@ -6,6 +6,7 @@ import excecoes.IdAusenteException;
 import excecoes.IdDuplicadoException;
 import negocio.Medico;
 import dados.RepositorioMedico;
+import negocio.Agba;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -280,6 +281,7 @@ public class JFrameCadastrarMedicos extends javax.swing.JFrame {
 
     private void jButtonCADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCADASTRARActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente cadastrar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
@@ -292,10 +294,9 @@ public class JFrameCadastrarMedicos extends javax.swing.JFrame {
             String email = jTextFieldEMAIL.getText();
             String contato = jTextFieldCONTATO.getText();
         
-            Medico m = new Medico(nome, sobrenome, nascimento, genero, crm, especialidade, email, contato);
-            RepositorioMedico repositorio = new RepositorioMedico();
+            Medico m = agba.criarMedico(nome, sobrenome, nascimento, genero, crm, especialidade, email, contato);
             try {
-                repositorio.adicionar(m);    
+                agba.adicionarMedico(m);    
             } catch (IdDuplicadoException ex) {
                 Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IdAusenteException ex) {

@@ -7,6 +7,7 @@ import excecoes.IdDuplicadoException;
 import excecoes.PessoaOcupadoException;
 import excecoes.SalaOcupadaException;
 import dados.RepositorioConsulta;
+import negocio.Agba;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -199,20 +200,21 @@ public class JFrameCadastrarConsulta extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: AQUI
+        Agba agba = Agba.getInstancia();
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente cadastrar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
-            String id_consulta = TEXTO_CODIGO.getText();
+            String codigo_consulta = TEXTO_CODIGO.getText();
             String data_consulta = TEXTO_DATA.getText();
             String hora_consulta = TEXTO_HORA.getText();
             String id_paciente = TEXTO_CPF.getText();
             String id_medico = TEXTO_CRM.getText();
             String consultorio = TEXTO_CONSULTORIO.getText();
         
-        Consulta c = new Consulta(id_consulta, data_consulta, id_paciente, id_medico, consultorio, hora_consulta);
-        RepositorioConsulta repositorioConsulta = new RepositorioConsulta();
+        Consulta c = agba.criarConsulta(codigo_consulta, data_consulta, id_paciente, id_medico, consultorio, hora_consulta);
+        
             try {
-                repositorioConsulta.adicionar(c);
+                agba.adicionarConsulta(c);
             } catch (IdDuplicadoException ex) {
                 Logger.getLogger(JFrameCadastrarConsulta.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SalaOcupadaException ex) {

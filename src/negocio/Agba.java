@@ -10,6 +10,7 @@ import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
 import excecoes.IdAusenteException;
 import excecoes.IdDuplicadoException;
+import excecoes.LoginIncorretoException;
 import excecoes.PessoaOcupadoException;
 import excecoes.SalaOcupadaException;
 import gui.JFrameLogin;
@@ -17,6 +18,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,11 +30,18 @@ public class Agba  implements IAgba {
     private RepositorioConsulta repoConsulta;
     private RepositorioPaciente repoPaciente;
     private RepositorioMedico repoMedico;
+    private Consulta c;
+    private Medico m;
+    private Paciente p;
     
     private Agba() {
         this.repoConsulta = new RepositorioConsulta();
         this.repoPaciente = new RepositorioPaciente();
         this.repoMedico = new RepositorioMedico();
+        this.c = null;
+        this.m = null;
+        this.p = null;
+        
     }
     
     public static Agba getInstancia() {
@@ -50,7 +59,7 @@ public class Agba  implements IAgba {
             System.out.println("Conexão estabelecida com sucesso!");
 
             Conexao.verificarEstrutura(conexao);
-            Conexao.inicializarTabelas();
+            
 
             java.awt.EventQueue.invokeLater(() -> {
                 new JFrameLogin().setVisible(true);
@@ -75,7 +84,18 @@ public class Agba  implements IAgba {
         }
     }
     
+    
+    //MÉTODOS USUÁRIO
+    public void loginUsuario(String login, String senha) throws LoginIncorretoException {
+        Usuario usuario = new Usuario(login, senha);
+        usuario.Login(login, senha);
+    }
+    
     //MÉTODOS CRUD CONSULTA
+    public Consulta criarConsulta (String codigo_consulta, String data_consulta, String id_paciente, String id_medico, String consultorio, String hora_consulta) {
+        c = new Consulta(codigo_consulta, data_consulta, id_paciente, id_medico, consultorio, hora_consulta);
+        return c;
+    }
     
     public void adicionarConsulta (Consulta C) throws IdDuplicadoException, SalaOcupadaException, PessoaOcupadoException, IdAusenteException {
         repoConsulta.adicionar(C);
@@ -87,10 +107,13 @@ public class Agba  implements IAgba {
     
     public void removerConsulta (String codigo_consulta) {
         repoConsulta.remover(codigo_consulta);
+  
     }
     
-    public void buscarConsulta (String codigo_consulta) {
-        repoConsulta.buscar(codigo_consulta);
+    public Consulta buscarConsulta (String codigo_consulta) {
+        c = repoConsulta.buscar(codigo_consulta);
+        return c;
+        
     }
     
     public List<Consulta> listarConsultas () {
@@ -100,7 +123,7 @@ public class Agba  implements IAgba {
     }
     
     public Consulta buscarConsultaPorId (int id_consulta) {
-        Consulta c = repoConsulta.buscarConsultaPorId(id_consulta);
+        c = repoConsulta.buscarConsultaPorId(id_consulta);
         return c;
     }
     
@@ -116,6 +139,11 @@ public class Agba  implements IAgba {
     
     //MÉTODOS CRUD PACIENTE
     
+    public Paciente criarPaciente(String nome, String sobrenome, String data_nascimento, String genero, String telefone, String email, String cpf) {
+        p = new Paciente(nome, sobrenome, data_nascimento, genero, telefone, email, cpf);
+        return p;
+    }
+    
     public void adicionarPaciente(Paciente p) throws IdDuplicadoException, IdAusenteException {
         repoPaciente.adicionar(p);
     }
@@ -128,8 +156,14 @@ public class Agba  implements IAgba {
         repoPaciente.remover(cpf);
     }
     
-    public void buscarPaciente (String cpf) {
-        repoPaciente.buscar(cpf);
+    public Paciente buscarPaciente (String cpf) {
+        p = repoPaciente.buscar(cpf);
+        return p;
+    }
+    
+    public Paciente buscarPacientePorId (int id_paciente) {
+        p = repoPaciente.buscarPorId(id_paciente);
+        return p;
     }
     
     public List<Paciente> listarPacientes () {
@@ -139,6 +173,11 @@ public class Agba  implements IAgba {
     }
     
     //MÉTODOS CRUD MÉDICO
+    
+    public Medico criarMedico(String nome, String sobrenome, String data_nascimento, String genero, String crm, String especialidade, String email, String telefone) {
+        m = new Medico(nome, sobrenome, data_nascimento, genero, crm, especialidade, email, telefone);
+        return m;
+    }
     
     public void adicionarMedico(Medico m) throws IdDuplicadoException, IdAusenteException {
         repoMedico.adicionar(m);
@@ -152,8 +191,14 @@ public class Agba  implements IAgba {
         repoMedico.remover(crm);
     }
     
-    public void buscarMedico (String crm) {
-        repoMedico.buscar(crm);
+    public Medico buscarMedico (String crm) {
+        m = repoMedico.buscar(crm);
+        return m;
+    }
+    
+    public Medico buscarMedicoPorId (int id_medico) {
+        m = repoMedico.buscarPorId(id_medico);
+        return m;
     }
     
     public List<Medico> listarMedicos () {

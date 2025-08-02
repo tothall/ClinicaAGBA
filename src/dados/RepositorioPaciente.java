@@ -85,8 +85,7 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
 
     @Override
     public void atualizar(Paciente p) throws IdDuplicadoException, IdAusenteException {
-        Paciente pPrevio = p;
-        if (buscar(p.getCpf()) != null && pPrevio.getCpf() == p.getCpf()) {
+        if (buscar(p.getCpf()) != null && buscar(p.getCpf()).getId() == p.getId()) {
             
         } else {
             throw new IdDuplicadoException("CPF já cadastrado: " + p.getCpf());
@@ -134,6 +133,30 @@ public class RepositorioPaciente implements IRepositorio<Paciente> {
 
         try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, cpf);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Paciente(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getString("sobrenome"),
+                    rs.getString("data_nascimento"),
+                    rs.getString("genero"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("cpf")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Paciente buscarPorId(int id) {
+        String sql = "SELECT * FROM paciente WHERE id = ?";
+
+        try (Connection conn = Conexao.conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Paciente(

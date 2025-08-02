@@ -12,6 +12,7 @@ import negocio.Medico;
 import negocio.Paciente;
 import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
+import negocio.Agba;
 import utils.TabelaUtilitariaBD;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -287,12 +288,13 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         String input = JOptionPane.showInputDialog(this, "Digite o CPF do(a) paciente:");
         if(input.isBlank() || input == null){
             return;
         }
-        RepositorioPaciente repositorio = new RepositorioPaciente();
-        Paciente m = repositorio.buscar(input);
+        
+        Paciente m = agba.buscarPaciente(input);
         
         if(m == null){
             JOptionPane.showMessageDialog(null, "Paciente não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -306,13 +308,14 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         String input = JOptionPane.showInputDialog(this, "Digite o CPF do(a) paciente:");
         if (input == null || input.isBlank()) {
             return;
         }
 
-        RepositorioPaciente repositorio = new RepositorioPaciente();
-        Paciente m = repositorio.buscar(input);
+        
+        Paciente m = agba.buscarPaciente(input);
 
         if (m == null) {
             JOptionPane.showMessageDialog(null, "Paciente não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -350,7 +353,7 @@ public class JFrameBuscarPacientes extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
 
             if (confirmacao == JOptionPane.YES_OPTION) {
-                repositorio.remover(input);
+                agba.removerPaciente(input);
                 JOptionPane.showMessageDialog(frame, "Paciente deletado(a) com sucesso!");
                 JFrameBuscarPacientes novaTela = new JFrameBuscarPacientes();
                 novaTela.setVisible(true);

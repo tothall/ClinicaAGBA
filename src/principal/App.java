@@ -3,10 +3,10 @@ package principal;
 import negocio.Agba;
 
 
-public class App extends Agba {
+public class App {
     public static void main(String[] args) {
-        Agba app = new Agba();
-        app.iniciarSistema();
+        Agba instancia = Agba.getInstancia();
+        instancia.iniciarSistema();
     }
 
     

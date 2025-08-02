@@ -6,6 +6,9 @@ import excecoes.IdDuplicadoException;
 import negocio.Medico;
 import dados.RepositorioMedico;
 import excecoes.IdAusenteException;
+import excecoes.PessoaOcupadoException;
+import excecoes.SalaOcupadaException;
+import negocio.Agba;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -235,6 +238,7 @@ public class JFrameAtualizarMedicos extends javax.swing.JFrame {
 
     private void jButtonATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonATUALIZARActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente atualizar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
@@ -254,12 +258,16 @@ public class JFrameAtualizarMedicos extends javax.swing.JFrame {
             medico.setEspecialidade(especialidade);
             medico.setEmail(email);
             medico.setTelefone(contato);
-            RepositorioMedico repositorio = new RepositorioMedico();
+            
             try {
-                repositorio.atualizar(medico);
+                agba.atualizarMedico(medico);
             } catch (IdAusenteException ex) {
                 Logger.getLogger(JFrameAtualizarMedicos.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IdDuplicadoException ex) {
+                Logger.getLogger(JFrameAtualizarMedicos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SalaOcupadaException ex) {
+                Logger.getLogger(JFrameAtualizarMedicos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PessoaOcupadoException ex) {
                 Logger.getLogger(JFrameAtualizarMedicos.class.getName()).log(Level.SEVERE, null, ex);
             }
             utils.Popup.show(this,"SUCESSO! AGUARDE...");
