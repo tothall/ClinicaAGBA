@@ -4,10 +4,10 @@
  */
 package dados;
 import java.util.List;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
-import negocio.PessoaOcupadoException;
-import negocio.SalaOcupadaException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
+import excecoes.PessoaOcupadoException;
+import excecoes.SalaOcupadaException;
 
 /**
  *

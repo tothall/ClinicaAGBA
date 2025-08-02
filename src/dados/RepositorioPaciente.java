@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
 
 /**
  *

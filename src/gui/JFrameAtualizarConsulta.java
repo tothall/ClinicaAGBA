@@ -4,12 +4,12 @@ import gui.JFrameBuscarMedicos;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Consulta;
-import negocio.IdDuplicadoException;
-import negocio.LoginIncorretoException;
-import negocio.PessoaOcupadoException;
-import negocio.SalaOcupadaException;
+import excecoes.IdDuplicadoException;
+import excecoes.LoginIncorretoException;
+import excecoes.PessoaOcupadoException;
+import excecoes.SalaOcupadaException;
 import dados.RepositorioConsulta;
-import negocio.IdAusenteException;
+import excecoes.IdAusenteException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

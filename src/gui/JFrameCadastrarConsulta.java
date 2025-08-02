@@ -2,10 +2,10 @@ package gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Consulta;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
-import negocio.PessoaOcupadoException;
-import negocio.SalaOcupadaException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
+import excecoes.PessoaOcupadoException;
+import excecoes.SalaOcupadaException;
 import dados.RepositorioConsulta;
 
 /*

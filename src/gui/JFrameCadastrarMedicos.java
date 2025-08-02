@@ -2,8 +2,8 @@ package gui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
 import negocio.Medico;
 import dados.RepositorioMedico;
 

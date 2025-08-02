@@ -2,11 +2,11 @@ package gui;
 import gui.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
 import negocio.Medico;
 import negocio.Paciente;
-import negocio.PessoaOcupadoException;
+import excecoes.PessoaOcupadoException;
 import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
 /*
