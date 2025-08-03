@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Medico;
 import dados.RepositorioMedico;
+import controller.Agba;
 import utils.TabelaUtilitariaBD;
 
 /*
@@ -286,12 +287,13 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         String input = JOptionPane.showInputDialog(this, "Digite o CRM do(a) médico(a):");
         if(input.isBlank() || input == null){
             return;
         }
-        RepositorioMedico repositorio = new RepositorioMedico();
-        Medico m = repositorio.buscar(input);
+        
+        Medico m = agba.buscarMedico(input);
         
         if(m == null){
             JOptionPane.showMessageDialog(null, "Médico(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -307,13 +309,13 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
 
     private void BotaoDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoDeletarActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         String input = JOptionPane.showInputDialog(this, "Digite o CRM do(a) médico(a):");
     if (input == null || input.isBlank()) {
         return;
     }
 
-    RepositorioMedico repositorio = new RepositorioMedico();
-    Medico m = repositorio.buscar(input);
+    Medico m = agba.buscarMedico(input);
 
     if (m == null) {
         JOptionPane.showMessageDialog(null, "Médico(a) não encontrado(a)", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -351,7 +353,7 @@ public class JFrameBuscarMedicos extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmacao == JOptionPane.YES_OPTION) {
-            repositorio.remover(input);
+            agba.removerMedico(input);
             JOptionPane.showMessageDialog(frame, "Médico(a) deletado(a) com sucesso!");
             JFrameBuscarMedicos novaTela = new JFrameBuscarMedicos();
             novaTela.setVisible(true);

@@ -5,8 +5,11 @@ import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
+import excecoes.PessoaOcupadoException;
+import excecoes.SalaOcupadaException;
+import controller.Agba;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -219,6 +222,7 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente atualizar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
@@ -236,12 +240,16 @@ public class JFrameAtualizarPacientes extends javax.swing.JFrame {
             paciente.setCpf(cpf);
             paciente.setEmail(email);
             paciente.setTelefone(contato);
-            RepositorioPaciente repositorio = new RepositorioPaciente();
+            
             try {
-                repositorio.atualizar(paciente);
+                agba.atualizarPaciente(paciente);
             } catch (IdDuplicadoException ex) {
                 Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IdAusenteException ex) {
+                Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SalaOcupadaException ex) {
+                Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PessoaOcupadoException ex) {
                 Logger.getLogger(JFrameAtualizarPacientes.class.getName()).log(Level.SEVERE, null, ex);
             }
             utils.Popup.show(this,"SUCESSO! AGUARDE...");

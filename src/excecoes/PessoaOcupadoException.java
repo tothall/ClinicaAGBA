@@ -2,19 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package negocio;
-
+package excecoes;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ezequiel
  */
-public class ConsultaSimultaneaException extends Exception {
-    public ConsultaSimultaneaException(String mensagem) {
+public class PessoaOcupadoException extends Exception {
+    public PessoaOcupadoException(String mensagem) {
         super(mensagem);
-        JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, mensagem, "ERRO", JOptionPane.ERROR_MESSAGE);
     }
-    
-    
 }

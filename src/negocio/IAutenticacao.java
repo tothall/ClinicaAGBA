@@ -4,6 +4,8 @@
  */
 package negocio;
 
+import excecoes.LoginIncorretoException;
+
 /**
  *
  * @author ezequiel

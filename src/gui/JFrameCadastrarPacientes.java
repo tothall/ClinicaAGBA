@@ -2,13 +2,14 @@ package gui;
 import gui.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negocio.IdAusenteException;
-import negocio.IdDuplicadoException;
+import excecoes.IdAusenteException;
+import excecoes.IdDuplicadoException;
 import negocio.Medico;
 import negocio.Paciente;
-import negocio.PessoaOcupadoException;
+import excecoes.PessoaOcupadoException;
 import dados.RepositorioMedico;
 import dados.RepositorioPaciente;
+import controller.Agba;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -207,6 +208,7 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente cadastrar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
         if (opcao == javax.swing.JOptionPane.YES_OPTION) {
@@ -218,10 +220,10 @@ public class JFrameCadastrarPacientes extends javax.swing.JFrame {
             String email = TEXTO_EMAIL.getText();
             String contato = TEXTO_CONTATO.getText();
         
-            Paciente m = new Paciente(nome, sobrenome, nascimento, genero, contato, email, cpf);
-            RepositorioPaciente repositorio = new RepositorioPaciente();
+            Paciente m = agba.criarPaciente(nome, sobrenome, nascimento, genero, contato, email, cpf);
+            
             try {
-                repositorio.adicionar(m);
+                agba.adicionarPaciente(m);
                 utils.Popup.show(this,"SUCESSO! AGUARDE...");
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {

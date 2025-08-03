@@ -4,12 +4,13 @@ import gui.JFrameBuscarMedicos;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Consulta;
-import negocio.IdDuplicadoException;
-import negocio.LoginIncorretoException;
-import negocio.PessoaOcupadoException;
-import negocio.SalaOcupadaException;
+import excecoes.IdDuplicadoException;
+import excecoes.LoginIncorretoException;
+import excecoes.PessoaOcupadoException;
+import excecoes.SalaOcupadaException;
 import dados.RepositorioConsulta;
-import negocio.IdAusenteException;
+import excecoes.IdAusenteException;
+import controller.Agba;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -214,6 +215,7 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: AQUI
+        Agba agba = Agba.getInstancia();
         int opcao = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente atualizar?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
     
     if (opcao == javax.swing.JOptionPane.YES_OPTION) {
@@ -229,9 +231,9 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
         consulta.setId_paciente(id_paciente);
         consulta.setId_medico(id_medico);
         consulta.setConsultorio(consultorio);
-        RepositorioConsulta repositorioConsulta = new RepositorioConsulta();      
+             
             try {
-                repositorioConsulta.atualizar(consulta);
+                agba.atualizarConsulta(consulta);
             } catch (IdAusenteException ex) {
                 Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SalaOcupadaException ex) {

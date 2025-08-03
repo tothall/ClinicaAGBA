@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.Consulta;
 import dados.RepositorioConsulta;
+import controller.Agba;
 import utils.TabelaUtilitariaBD;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -287,11 +288,12 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here: AQUIIIII
         String input = JOptionPane.showInputDialog(this, "Digite o código da consulta:");
+        Agba agba = Agba.getInstancia();
         if (input == null || input.isBlank()) {
         return;
         }
-        RepositorioConsulta repositorio = new RepositorioConsulta();
-        Consulta c = repositorio.buscar(input);
+        
+        Consulta c = agba.buscarConsulta(input);
         if(c == null){
             JOptionPane.showMessageDialog(null, "Consulta não encontrada", "ERRO", JOptionPane.ERROR_MESSAGE);
             return;
@@ -306,13 +308,13 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        Agba agba = Agba.getInstancia();
         String input = JOptionPane.showInputDialog(this, "Digite o código da consulta:");
     if (input == null || input.isBlank()) {
         return;
     }
 
-    RepositorioConsulta repositorio = new RepositorioConsulta();
-    Consulta m = repositorio.buscar(input);
+    Consulta m = agba.buscarConsulta(input);
 
     if (m == null) {
         JOptionPane.showMessageDialog(null, "Consulta não encontrada", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -350,7 +352,7 @@ public class JFrameBuscarConsultas extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmacao == JOptionPane.YES_OPTION) {
-            repositorio.remover(input);
+            agba.removerConsulta(input);
             JOptionPane.showMessageDialog(frame, "Consulta deletada com sucesso!");
             JFrameBuscarConsultas novaTela = new JFrameBuscarConsultas();
             novaTela.setVisible(true);

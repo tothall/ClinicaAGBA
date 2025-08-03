@@ -3,8 +3,9 @@ package gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import negocio.LoginIncorretoException;
-import negocio.Usuario;
+import excecoes.LoginIncorretoException;
+import controller.Agba;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -158,10 +159,10 @@ public class JFrameLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String login = jTextFieldUsuario.getText();
         String senha = new String(jPasswordField1.getPassword());
+        Agba agba = Agba.getInstancia();
         
-        Usuario usuario = new Usuario(login, senha);
         try {
-            usuario.Login(login, senha);
+            agba.loginUsuario(login, senha);
             
             JFrameMenu menu = new JFrameMenu();
             menu.setVisible(true);
