@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repositorios;
+package utils;
 
 import dados.Conexao;
 
@@ -73,7 +73,7 @@ public class TabelaUtilitariaBD {
             busca = "SELECT * FROM " + nomeTabela + " WHERE cpf = ?";
             break;
         case "consulta":
-            busca = "SELECT * FROM " + nomeTabela + " WHERE id_consulta = ?";
+            busca = "SELECT * FROM " + nomeTabela + " WHERE codigo_consulta = ?";
             break;
             
     }

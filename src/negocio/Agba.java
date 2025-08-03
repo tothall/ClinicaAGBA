@@ -4,39 +4,50 @@
  */
 package negocio;
 
-import java.util.ArrayList;
+import dados.Conexao;
+import gui.JFrameLogin;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ezequiel
  */
-public abstract class Agba<P, ID> extends AgbaAbstrato<P, ID>{
-    
-    public Agba(P pacientes, P medicos, P consultas) {
-        super(pacientes, medicos, consultas);
-        
+public class Agba  implements IAgba {
+    public Agba() {
     }
-    
+
     @Override
-    public abstract void iniciarSistema();
-    
+    public void iniciarSistema() throws UnsupportedOperationException {
+        try {
+            Connection conexao = Conexao.conectar();
+            System.out.println("Conexão estabelecida com sucesso!");
+
+            Conexao.verificarEstrutura(conexao);
+            Conexao.inicializarTabelas();
+
+            java.awt.EventQueue.invokeLater(() -> {
+                new JFrameLogin().setVisible(true);
+            });
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar com o banco: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            System.out.println(new java.io.File("agba.db").getAbsolutePath());
+            System.exit(1);
+        } catch (UnsupportedOperationException e){
+            JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+         
+    }
+
     @Override
-    public abstract P cadastrar(P pessoa);
-    
-    @Override
-    public abstract P atualizar(ID id, P pessoaAtualizada);
-    
-    @Override
-    public abstract P buscar(ID id);
-    
-    @Override
-    public abstract P deletar(P pessoa);
-    
-    @Override
-    public abstract void listar(ArrayList<P> pessoas);
-    
-    @Override
-    public abstract void finalizarSistema();
-    
+    public void finalizarSistema() throws UnsupportedOperationException {
+        
+        try {
+            System.exit(0);
+        } catch (UnsupportedOperationException e) {
+            JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
 }

@@ -8,7 +8,8 @@ import negocio.IdDuplicadoException;
 import negocio.LoginIncorretoException;
 import negocio.PessoaOcupadoException;
 import negocio.SalaOcupadaException;
-import repositorios.RepositorioConsulta;
+import dados.RepositorioConsulta;
+import negocio.IdAusenteException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -229,7 +230,17 @@ public class JFrameAtualizarConsulta extends javax.swing.JFrame {
         consulta.setId_medico(id_medico);
         consulta.setConsultorio(consultorio);
         RepositorioConsulta repositorioConsulta = new RepositorioConsulta();      
-        repositorioConsulta.atualizar(consulta);
+            try {
+                repositorioConsulta.atualizar(consulta);
+            } catch (IdAusenteException ex) {
+                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SalaOcupadaException ex) {
+                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PessoaOcupadoException ex) {
+                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IdDuplicadoException ex) {
+                Logger.getLogger(JFrameAtualizarConsulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
         java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             new JFrameBuscarConsultas().setVisible(true);

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repositorios;
+package dados;
 
 import dados.Conexao;
 import negocio.Medico;
@@ -11,6 +11,9 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import negocio.IdAusenteException;
 import negocio.IdDuplicadoException;
 
 /**
@@ -48,10 +51,13 @@ public class RepositorioMedico implements IRepositorio<Medico> {
     }
 
     @Override
-    public void adicionar(Medico m) throws IdDuplicadoException {
+    public void adicionar(Medico m) throws IdDuplicadoException, IdAusenteException {
+        if (m.getCrm() == null || m.getCrm().trim().isEmpty()) {
+            throw new IdAusenteException("CRM não pode ser nulo ou vazio.");
+        }
         if (buscar(m.getCrm()) != null) {
         throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm());
-    }
+        }
         String sql = """
             INSERT INTO medico (nome, sobrenome, data_nascimento, genero, crm, especialidade, email, telefone)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?);
@@ -86,8 +92,24 @@ public class RepositorioMedico implements IRepositorio<Medico> {
 
     }
 
+    /**
+     *
+     * @param m
+     * @throws negocio.IdAusenteException
+     * @throws negocio.IdDuplicadoException
+     */
     @Override
-    public void atualizar(Medico m) {
+    public void atualizar(Medico m) throws IdAusenteException, IdDuplicadoException {
+        Medico mPrevio = m;
+        if (m.getCrm() == null || m.getCrm().trim().isEmpty()) {
+                throw new IdAusenteException("CRM não pode ser nulo ou vazio.");
+            }
+        
+        if (buscar(m.getCrm()) != null && mPrevio.getCrm() == m.getCrm()) {
+                
+        } else {
+            throw new IdDuplicadoException("CRM já cadastrado: " + m.getCrm()); 
+        }
         String sql = """
             UPDATE medico SET
                 nome = ?, sobrenome = ?, data_nascimento = ?, genero = ?,

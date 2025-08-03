@@ -4,20 +4,14 @@
  */
 package negocio;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author ezequiel
- * @param <P>
- * @param <ID>
+ *
  */
-public interface IAgba<P, ID> {
+public interface IAgba{
+    
     void iniciarSistema();
-    P cadastrar(P pessoa);
-    P atualizar(ID id, P pessoaAtualizada);
-    P buscar(ID id);
-    P deletar(P pessoa);
-    void listar(ArrayList<P> pessoas);
+   
     void finalizarSistema();
 }
